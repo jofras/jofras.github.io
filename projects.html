@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projects</title>
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+
+  <!-- REQUIRED: global styles -->
+  <link rel="stylesheet" href="/src/style.css" />
+
+  <!-- REQUIRED: load components + theme -->
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <!-- REQUIRED: navbar component -->
+  <site-navbar></site-navbar>
+
+  <main class="container">
+    <h1>Projects</h1>
+
+    <p class="projects-subtitle">
+      Short intros to selected work
+    </p>
+
+    <section class="projects">
+      <project-card
+        title="Lost in Transcription"
+        tagline="My bachelor's thesis on ASR hallucinations."
+        image="/public/images/project1.jpg"
+        link="/project-1.html">
+      </project-card>
+
+      <project-card
+        title="Network Portal"
+        tagline="Diagnostic tools for the Canton of Neuchâtel."
+        image="/public/images/project2.jpg"
+        link="/project-2.html">
+      </project-card>
+
+      <project-card
+        title="3Steps Athletics"
+        tagline="A hockey camp website for a friend."
+        image="/public/images/project3.jpg"
+        link="/project-3.html">
+      </project-card>
+
+      <project-card
+        title="3D Graphics Pipeline"
+        tagline="An interactive engine as part of my computer graphics fundamentals course."
+        image="/public/images/project4.jpg"
+        link="/project-4.html">
+      </project-card>
+    </section>
+  </main>
+</body>
+</html>

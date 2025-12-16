@@ -1,0 +1,16 @@
+portfolio/
+├─ index.html
+├─ about.html
+├─ project-1.html
+├─ project-2.html
+├─ project-3.html
+├─ public/
+│  └─ images/
+│     ├─ project1.jpg
+│     ├─ project2.jpg
+│     └─ project3.jpg
+├─ src/
+│  ├─ style.css
+│  └─ theme.js
+├─ package.json
+└─ vite.config.js

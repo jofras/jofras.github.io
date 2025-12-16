@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+
+  <title>About</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="container">
+    <section class="about">
+      <div>
+        <h1>About Me</h1>
+        <p>
+            I'm a recent computer science graduate from ETH Zurich, currently working as a software engineering intern in Neuchâtel. 
+        </p>
+        <p>
+            During my degree, I spent a semester at Purdue, where I built a graphics pipeline and raced with the triathlon club. My thesis was on word embeddings from ASR transcripts, supervised by Alexander Hoyle and Ryan Cotterell.
+        </p>
+        <p>
+            At work, I speed up code and build diagnostic tools for our team. I've been learning French along the way. What I've realized is that I enjoy the human side of building. Understanding what people actually need, designing solutions that feel intuitive.
+        </p>
+        <p>
+            Next year, I want to start my master's in interaction design. I want to build things that make people happy. 
+        </p>
+      </div>
+
+      <div class="about-image">
+        <img src="/public/images/me.jpg" alt="Portrait" />
+      </div>
+
+    </section>
+  </main>
+</body>
+</html>

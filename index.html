@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+
+  <title>Jonathan Quinn</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Why hello there.</h1>
+      <p>
+        A small collection of projects exploring theory, systems and design.
+      </p>
+    </section>
+
+    <section class="projects">
+      <project-card
+        title="Lost in Transcription"
+        tagline="My bachelor's thesis on ASR hallucinations."
+        image="/public/images/project1.jpg"
+        link="/project-1.html">
+      </project-card>
+
+      <project-card
+        title="Network Portal"
+        tagline="Diagnostic tools for the Canton of Neuchâtel."
+        image="/public/images/project2.jpg"
+        link="/project-2.html">
+      </project-card>
+
+      <project-card
+        title="3Steps Athletics"
+        tagline="A hockey camp website for a friend."
+        image="/public/images/project3.jpg"
+        link="/project-3.html">
+      </project-card>
+
+      <project-card
+        title="3D Graphics Pipeline"
+        tagline="An interactive engine as part of my computer graphics fundamentals course."
+        image="/public/images/project4.jpg"
+        link="/project-4.html">
+      </project-card>
+    </section>
+  </main>
+</body>
+</html>
