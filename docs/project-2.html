@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+
+  <title>Network Portal</title>
+
+  <!-- REQUIRED: global styles -->
+
+  <!-- REQUIRED: components + theme -->
+  <script type="module" crossorigin src="/assets/main-BSwUe5XD.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-renB4jpI.css">
+</head>
+<body>
+  <!-- REQUIRED: navbar -->
+  <site-navbar></site-navbar>
+
+  <main class="article">
+    <h1>Network Portal</h1>
+    <p class="subtitle">
+        A full-stack network monitoring app for the canton of Neuchâtel.
+    </p>
+
+    <img src="/assets/intuitive-coloring-1WjpW0-Y.png" alt="Title image" />
+
+    <h2>Motivation</h2>
+
+    <p>
+      The network portal project was all about helping our team’s engineers with configuration and diagnostics. They were spending so much time weekly, daily even, trying to figure out where customer problems were coming from.
+    </p>
+
+    <p>
+      To figure out paths to endpoints, all they had were inventory and database tables, but no easy way of figuring out where stuff connected. They’d have to sort through UUID-keyed link tables, use traceroutes, and then manually query equipment command-line to get info like VRFs and VLANs. It took a lot of time, time they could spend on using their engineering background for network security and other architecture-related concerns.
+    </p>
+
+    <p>
+      The switch visualizer was created to help on-site technicians. Before, a technician would arrive at a remote site, see a switch full of cables, and then have to call into the office to get an administrator to tell them what was where, what they needed to plug in and out. Worse yet, the administrators gave them info by SSHing onto the switch, then running a multitude of commands to get interface info. They didn’t have oversight, a global view of all ports. And the technician was helpless without the administrator, who usually had better stuff to do anyway.
+    </p>
+
+    <h2>Design</h2>
+
+    <p>
+      The design process was quite organic for this project. I started with a rough idea of everyone’s requirements, then iterated on them, asking the team to use the tool and note what they liked and would like added/improved. This way, over the course of two months, we got the tool into production shape before my contract ended.
+    </p>
+
+    <h3>Backend</h3>
+
+    <p>
+      To fix the problem, I started backend. I adapted the total network scanning architecture I had put in place a few weeks earlier to optimize the BFS-style full network scan. Because path tracing and port visualization are fundamentally different operations, I had to implement two algorithms.
+    </p>
+
+    <p>
+      The path tracing algorithm, dubbed “macscanner”, queries the database with the target IP’s address, then joins ARP and subnet tables to get the original router’s name. It then runs a recursive next-hop-style algorithm, keeping track of each equipment (and metadata) on the way, until it gets to the endpoint.
+    </p>
+
+    <p>
+      The switch visualizer backend, put simply, just queries the switch in question with a bunch of OIDs (what network devices use to store info) and organizes them into a dictionary for the frontend to parse.
+    </p>
+
+    <h3>Pathfinder Frontend</h3>
+
+    <p>
+      The pathfinder frontend was kept fairly simple to give users the info they needed as quickly as possible. The tool immediately shows VLAN, VRF, and target IP/MAC, information essential when troubleshooting an endpoint connection. The layout is clear and easily scannable.
+    </p>
+
+    <img src="/assets/basic-path-G3Iw0P8r.png" alt="Basic path interface" />
+
+    <p>
+      Below that, it shows the path through the network, from router to endpoint. The path is a chain of “info-cards” for each piece of equipment, connected by links that show configuration notes and ports at each end. This makes it incredibly easy for engineers to scroll through the path to the endpoint and then backtrack through the network from there. Info on the device-cards like platform and location may help in forming a hypothesis.
+    </p>
+
+    <img src="/assets/info-card-BeK5ZWEJ.png" alt="Path info card" />
+
+    <p>
+      The design is complete with colors and emojis to make the tool more user-friendly. In my opinion, network infrastructure is already complicated enough, so it’s important to have a tool that makes the topic approachable. There is logic behind the colors: cards are outlined based on their category (router, switch, host, etc.), and emojis represent the type of equipment you’re looking at.
+    </p>
+
+    <img src="/assets/horn-emoji-CJLWa5Yz.png" alt="Voice equipment emoji" />
+
+    <h3>Switch Visualization</h3>
+
+    <p>
+      In terms of UI, the switch visualizer was a much more significant project. My boss and I wanted to create as natural to the task as possible. What would make technicians go “whoa”? Make their job as easy as possible?
+    </p>
+
+    <p>
+      So we made the tool a mirror image of the interface they faced in real life: the front of the switch, all ports visible. The technician should immediately know what’s connected where.
+    </p>
+
+    <img src="/assets/basic-view-BS8hJQQ0.png" alt="Switch main view" />
+
+    <p>
+      The biggest requirement was being able to hover over and getting info on what VLAN was configured (think what rules apply to equipment connected to this port) and whether the connection was up or not. This inspired using colors per VLAN, and adding small green/red lines to port overlays to indicate operating status.
+    </p>
+
+    <img src="/assets/vlan-port-view-BJpX3UVn.png" alt="VLANs and ports" />
+
+    <p>
+        If something is connected on one of the port's VLANs, the respective VLAN color becomes more opaque.
+    </p>
+
+    <img src="/assets/intuitive-coloring-1WjpW0-Y.png" alt="Colors!" />
+
+    <p>
+      Another important feature was to add stacks. In networks, you can stack multiple physical switches into one virtual one with (it follows) more ports. Such switches share an IP address, and are managed by a “master” switch, the first one in the stack. If a technician looks up a stack, all members are returned, complete with chassis info to differentiate between them:
+    </p>
+
+    <img src="/assets/stack-Bukcl583.png" alt="Stack example" />
+
+    <p>
+      Next, I integrated a table of protocol-discoverable (CDP) neighboring equipment. All of these are visible on some port; on hover/click the corresponding port lights up.
+    </p>
+
+    <img src="/assets/cdp-DIjatfj-.png" alt="CDP view" />
+
+    <p>
+      An extra feature I integrated was maps. Once you have the view, you can open the switch’s location either in Google Maps, or, using Swiss coordinates, on a custom cantonal map that includes links between equipment.
+    </p>
+
+    <img src="/assets/location-qvY6Cf8T.png" alt="Map options" />
+
+    <p>
+      Once I had all that done, I started finetuning the site with technicians and engineers. We added a MAC search bar (shows you what port a MAC address is connected on), an ALL/UP/DOWN filter view relating to port operational stati, and clickable VLANs (also filter ports).
+    </p>
+
+    <img src="/assets/mac-search-Dp3BhFqi.png" alt="MAC address search" />
+
+    <img src="/assets/vlan-select-DKYvgfDN.png" alt="You can select VLANs" />
+
+    <p>
+      Later, I added a “Suggest Disconnect” button that, given a VLAN, finds the port configured with that VLAN that’s been down for the longest time. It models the technician’s most common use case: needing to disconnect a cable to branch a new one, but having no idea which cable he can pull.
+    </p>
+
+    <img src="/assets/disconnect-CxqIa1n6.png" alt="Suggest disconnections" />
+
+    <p>
+      And finally, we augmented each port with in- and outgoing packet discard and error statistics. This gives the user significant context when troubleshooting a port: for example, if a customer calls in with a faulty laptop and you see two laptops behind one port and a lot of discarded packets, you can be pretty sure they’ve installed a small switch that can’t handle the traffic.
+    </p>
+
+    <img src="/assets/packet-stats-DLTQFENm.png" alt="Interface stat matrix" />
+
+    <p>
+      In summary, the tool anticipates and intuitively displays all features technicians and other team members could possibly need when configuring switches and branching new equipment. The tool is set to launch in January, but has received a lot of positive feedback from early testers. Most importantly, it gives technicians independence: they no longer need administrators to gather info for them. This gives the administrators more freedom to do higher-priority tasks, and the technicians peace of mind and and independent agency.
+    </p>
+
+    <h3>General UX</h3>
+
+    <p>
+      The final step consisted of gluing these tools together, packaging them into one centralized tool to be used across the organization. And have a little fun while doing it.
+    </p>
+
+    <p>
+      To that end, I created a simple central portal website. Initially, it had a black background and very straightforward interface: enter an IP address, select a tool, and you’re off.
+    </p>
+
+    <img src="/assets/raw-BhAmlfCa.png" alt="First web interface" />
+
+    <p>
+      At some point, I thought the black background was kinda boring. It was riding the line of looking like every other IT network tool. An engineer wouldn’t take a second look at it; the dull background wouldn’t make me want to use the tool more. So I decided to add a background and little dragon emoji (which we determined was the canton’s new mascot).
+    </p>
+
+    <img src="/assets/background-DBjM_GEq.png" alt="Adding the city" />
+
+    <p>
+      I then wanted to add a bit of wonder to the tool, a little more intrigue. The whole thing was still a little static. Inspired by the “Disney-like” quality I had asked the image generation tool to recreate for the background, I inlined some JavaScript to add little glowing yellow lights, fireflies. They moved around the screen slowly, oscillating their glow. It made the portal seem a bit more magical.
+    </p>
+
+    <img src="/assets/fireflies-CjkcpUJa.png" alt="Owl city now" />
+
+    <p>
+      I was satisfied about effects for the time being. Next, I looked at ways I could improve the usage of the platform as a whole. Up until that point, I hadn’t integrated any feedback in terms of whether the backend was working on your request. Because not all equipment takes equally long to scan (long paths take longer than short ones; same goes for stacked equipment visualization), users might get impatient if they don’t know that the process is running, and click reload before it terminates.
+    </p>
+
+    <p>
+      To preempt this, I created loading screens with animations to play after launching a tool. They run whenever you change screens and really calmed me down.
+    </p>
+
+    <img src="/assets/loading-BSFBoBXW.png" alt="Loading screens for user feedback" />
+
+    <p>
+      I also added intuitive error views that give users an indication of what’s going wrong backend, so that (should a tool fail) they can troubleshoot efficiently.
+    </p>
+
+    <img src="/assets/error-Jmi8Nvhh.png" alt="Error detail" />
+
+    <p>
+      Next, my boss asked whether I could implement multiple language support, and make the default language French (I built the tool in English bc my network-infrastructure French isn’t quite there yet). So with the team’s help and some DeepL, I created French, Portuguese and Swiss German translations (sorry about the pixelation, poor bee):
+    </p>
+
+    <img src="/assets/language-support-GpAFRgV6.png" alt="Pixelated language selection" />
+
+    <p>
+      I then interviewed a few engineers and watched them process customer calls with the tool. I realized they’d often switch between views: for example, they’d use the pathfinder to check the path, memorize the last switch in the chain, and then query the switch visualizer with that IP. Maybe check out other neighbors of the switch.
+    </p>
+
+    <p>
+      I realized that the tools were gonna be used dynamically, and engineers/administrators were gonna switch between views as needed on call. So I decided to link the two.
+    </p>
+
+    <p>
+      On the pathfinder, I added links in info-cards next to switches that took you straight to the port visualization of that switch:
+    </p>
+
+    <img src="/assets/pathfinder-link-BU2X7Th4.png" alt="Link to switch viz" />
+
+    <p>
+      On the visualizer, I added links next to discovered neighbors. While these don’t necessarily cover all possible neighbors, it’s a very intuitive place to link them in the layout. And translating every discovered MAC per port would mean a lot of ARP table lookups on the router, which would create a dependency on a big database lookup. It could be done though?
+    </p>
+
+    <img src="/assets/swiz-link-cCYHaJP9.png" alt="Link to neighbor's path" />
+
+    <p>
+      After all that efficiency implementing, I went back to the landing page. I wanted it to feel more alive; a wintry background wouldn’t always be fitting, and might get a little old after a while.
+    </p>
+
+    <img src="/assets/winter-Bk6VVIyr.png" alt="It's cold outside" />
+
+    <p>
+      So inspired by my initial firefly design, we built seasonal effects: new backgrounds of the city in different seasons, complete with special effects per time of year.
+    </p>
+
+    <img src="/assets/spring-CBCfCR8S.png" alt="Rainy skies" />
+
+    <p>
+      This included falling snowflakes in winter (approximated with white circles), rain in spring, buzzing bees (inspired by a local hockey club’s logo) in summer, and falling leaves in autumn.
+    </p>
+
+    <img src="/assets/summer-D34jvsKb.png" alt="Beesiness" />
+
+    <p>
+      Each “particle” - flakes, rain, bees, and leaves - was given a different motion based on embedded JavaScript formulas. Snowflakes fell lightly, swaying; for leaves, the number of particles was reduced, and swaying was intensified. To approximate bees buzzing, I varied velocity and added random directional switches, where the bee image would invert to match the direction it was flying in.
+    </p>
+
+    <img src="/assets/fall-H9vkWAS5.png" alt="Pink and white" />
+
+    <p>
+      The pink sky in fall is inspired by my views of the mountains’ silhouettes on morning runs by the lake. When it’s fall and not foggy, Neuchâtel is beautiful. The picture doesn’t capture it uwu.
+    </p>
+
+    <h3>Special Days</h3>
+
+    <p>
+      Admittedly, I could have ended it there. But I had a few days left in the internship, tool ready to launch, documentation written, ready to pass the baton to the next intern. I had completed everything that was planned. Code was cleaned up.
+    </p>
+
+    <p>
+      But the team there was great, and I wanted to give them a tribute. So for each of the engineers in my office, I created special views, set to show on their birthdays. Kinda inspired by those alternate spellings of “Google” on Halloween or Christmas.
+    </p>
+
+    <img src="/assets/yayoi-CqjOZD1Q.png" alt="I love pumpkins too" />
+
+    <p>
+      This one’s for Jerome. His wife and he really like Yayoi Kusama, so I thought I’d theme it after her artwork, with all the polka dots and a floating pumpkin. I added a colorful sparkle effect to make it pop.
+    </p>
+
+    <img src="/assets/canada-DT5ci4RD.png" alt="Back in the 6ix" />
+
+    <p>
+      And here’s one I left for my birthday. I guess it’s kinda my stamp on the work.
+    </p>
+
+    <p>
+      I think it’s really important to make tools human. Add little touches. Build an efficient, clean backend, talk to people to understand their needs, integrate them of course. But then add a personal touch, some heartfelt warmth. The world of tech is dehumanizing enough.
+    </p>
+
+    <p>
+      I recently read Don Norman’s book on the design of everyday things. He argues that humans making mistakes with tech is not the human’s, but the tech designer’s fault. I agree strongly.
+    </p>
+
+    <p>
+      We should make scanning networks enjoyable, not confusing.
+    </p>
+
+    <h2>Results</h2>
+
+    <p>
+      So far, the tool has received very positive feedback from team members across the organization it was shown to. It’s set to be released for general use in January.
+    </p>
+
+    <p>
+      Apparently, the networks team will send it to clients too, hoping to eliminate some of their calls regarding switch problems, so that engineers can work on their main projects.
+    </p>
+
+    <p>
+      Exact estimates of time savings haven’t been made, but both troubleshooting on client calls and connecting to switches is sure to move from double-digit minutes to seconds.
+    </p>
+
+    <p>
+      I’m grateful to have been given so much autonomy with this project, and happy to have helped the team out by giving some time back. I hope they enjoy the custom views.
+    </p>
+
+  </main>
+</body>
+</html>
