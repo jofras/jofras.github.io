@@ -19,7 +19,7 @@ document.documentElement.setAttribute("data-theme", "dark");
 <p class="subtitle">
     Investigating how speech-to-text errors corrupt language models trained on podcast transcripts, and how different media construct meaning.
 </p>
-<img src="/assets/inlp-Bz1tC8z-.jpg" alt="Data preprocessing pipeline" />
+<img src="/images/inlp.jpg" alt="Data preprocessing pipeline" />
 <p>
     This project started as an investigation into gender bias in podcasts but turned into something else entirely. I wanted to compare spoken language (podcasts) against written text (news) using a massive dataset from 2020. But deep in preprocessing, I hit a wall: the dataset was broken. The signal of human conversation was being drowned out by the noise of the transcription AI, which was hallucinating text that didn't exist.
 </p>
@@ -40,7 +40,7 @@ I joined Rycolab at ETH to look at gender bias in the SPoRC dataset, a massive c
 <p>
 I was working on a local Mac with 8GB of RAM, trying to process 50GB of raw transcription JSONs, full of metadata. I had to optimize drastically just to get work done. About two or three months into preprocessing, scrolling through what I thought was finally clean data, I noticed something weird. The model wasn't just transcribing. It was looping.
 </p>
-<img src="/assets/run-length-distro-CCMBxAsK.jpg" alt="Distribution of hallucination loop lengths" />
+<img src="/images/run-length-distro.jpg" alt="Distribution of hallucination loop lengths" />
 <p>
 I found a specific file where the transcript didn't match the audio. The podcast was an emotional episode about police brutality, discussing George Floyd and Ahmaud Arbery. But in the transcript, huge chunks of that conversation were gone, overwritten by the AI repeating a random phrase hundreds of times.
 </p>
@@ -60,7 +60,7 @@ This section is about the systems I designed to handle the mess. I needed a way 
 <p>
 I built a parallel processing pipeline that treated data cleaning like an assembly line. It takes raw, messy JSONs, strips the metadata, cleans the text using extensive regex rules (things like non-speech audio markers), and merges fragmented files back into coherent transcripts.
 </p>
-<img src="/assets/pipeline-diagram-BwizBM3_.jpg" alt="Complete preprocessing pipeline architecture" />
+<img src="/images/pipeline-diagram.jpg" alt="Complete preprocessing pipeline architecture" />
 <p>
 This is the architecture I eventually ran on ETH's High-Performance Computing cluster. It modularizes the cleaning steps so I could iterate on specific parts, like fixing how the AI handles possessives or profanity, without re-running the whole thing.
 </p>
@@ -72,7 +72,7 @@ The hardest part was catching the hallucinations. A human might repeat "No, no, 
 <p>
 My solution was hashing. I used the xxHash algorithm to turn every sentence into a fixed-length cryptographic fingerprint. This allowed me to index the entire corpus in a PostgreSQL database and ask questions like "Where does this exact sentence appear 50 times in a row?" almost instantly.
 </p>
-<img src="/assets/database-schema-B43fwPER.jpg" alt="Database schema showing hash-based indexing" />
+<img src="/images/database-schema.jpg" alt="Database schema showing hash-based indexing" />
 <p>
 I designed this schema backwards from the questions I knew I'd need to ask. It maps every unique sentence hash to its location, allowing me to spot runs of identical hashes.
 </p>
@@ -86,7 +86,7 @@ Once I had the data clean, I finally got to the analysis. My goal here was to ma
 <p>
 I needed a mathematical proof for where "human repetition" ends and "AI glitch" begins. I ran tests on all sorts of metrics, eventually stumbling upon what I dubbed the "uniqueness ratio": for each sentence loop, I compared its content to all other sentences appearing in a loop of the same length. 
 </p>
-<img src="/assets/uniqueness-ratio-Dc1pEUCt.jpg" alt="Uniqueness ratio showing the transition point at run length 4" />
+<img src="/images/uniqueness-ratio.jpg" alt="Uniqueness ratio showing the transition point at run length 4" />
 <p>
 I call this the elbow. At a run length of 2 or 3, repeated phrases are common (humans saying "Yeah, yeah"). But past 4 repetitions, the graph shoots up, meaning each loop becomes increasingly unique. This visual proved that anything looping 4+ times was almost certainly a machine error, allowing me to filter the data safely.
 </p>
@@ -98,7 +98,7 @@ When I trained the GloVe models, the metrics were confusing. The vectors were po
 <p>
 To explain this, I created the pancake analogy:
 </p>
-<img src="/assets/project1-7H0q_0OO.jpg" alt="3D visualization of isotropic but low-variance vector space" />
+<img src="/images/project1.jpg" alt="3D visualization of isotropic but low-variance vector space" />
 <p>
 Imagine a pancake floating in a sphere. The data points are spread out all over the pancake (high isotropy), but they don't reach up or down into the rest of the sphere (low variance). This visualization helps explain why the model seemed both rich and limited at the same time.
 </p>
@@ -107,7 +107,7 @@ Imagine a pancake floating in a sphere. The data points are spread out all over 
 <p>
 I compared how podcasts and news "think" about the same concepts. I used Principal Component Analysis to find the main themes in the data. The results showed that the medium changes the message.
 </p>
-<img src="/assets/pca-table1-1A1Mx2A6.jpg" alt="Comparison of principal components between podcasts and news" />
+<img src="/images/pca-table1.jpg" alt="Comparison of principal components between podcasts and news" />
 <p>
 This table visualizes the semantic reality of 2020. In news, COVID-19 is framed through institutions: hospitalizations, guidelines, telehealth. In podcasts, the exact same crisis is framed through the body: proteins, nutrients, inflammation. Same events, completely different worlds.
 </p>
@@ -119,11 +119,11 @@ This table visualizes the semantic reality of 2020. In news, COVID-19 is framed 
 <p>
 I closed the loop on my original motivation by mapping gender bias.
 </p>
-<img src="/assets/t-sne-n9ttIoZG.jpg" alt="Scatter plot showing semantic segregation by gender" />
+<img src="/images/t-sne.jpg" alt="Scatter plot showing semantic segregation by gender" />
 <p>
 These scatter plots show the semantic clustering of gender-biased words in podcasts. To investigate their content, I looked at words most representative for each cluster:
 </p>
-<img src="/assets/gender-bias-table-B-HrLn_K.jpg" alt="Table of gender-biased semantic clusters" />
+<img src="/images/gender-bias-table.jpg" alt="Table of gender-biased semantic clusters" />
 <p>
 While it mostly confirmed that podcasts reinforce old stereotypes (women and home/family, men and conflict/sports), I did find one optimistic shift: business and entrepreneurship words, usually male-coded in news data, shifted toward the female cluster in podcasts, reflecting the rise of female creators in the medium.
 </p>
