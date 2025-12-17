@@ -27,7 +27,7 @@
         A full-stack network monitoring app for the canton of Neuchâtel.
     </p>
 
-    <img src="/src/images/network_portal_ux/intuitive-coloring.png" alt="Title image" />
+    <img src="/images/network_portal_ux/intuitive-coloring.png" alt="Title image" />
 
     <h2>Motivation</h2>
 
@@ -69,19 +69,19 @@
       The pathfinder frontend was kept fairly simple to give users the info they needed as quickly as possible. The tool immediately shows VLAN, VRF, and target IP/MAC, information essential when troubleshooting an endpoint connection. The layout is clear and easily scannable.
     </p>
 
-    <img src="/src/images/network_portal_ux/basic-path.png" alt="Basic path interface" />
+    <img src="/images/network_portal_ux/basic-path.png" alt="Basic path interface" />
 
     <p>
       Below that, it shows the path through the network, from router to endpoint. The path is a chain of “info-cards” for each piece of equipment, connected by links that show configuration notes and ports at each end. This makes it incredibly easy for engineers to scroll through the path to the endpoint and then backtrack through the network from there. Info on the device-cards like platform and location may help in forming a hypothesis.
     </p>
 
-    <img src="/src/images/network_portal_ux/info-card.png" alt="Path info card" />
+    <img src="/images/network_portal_ux/info-card.png" alt="Path info card" />
 
     <p>
       The design is complete with colors and emojis to make the tool more user-friendly. In my opinion, network infrastructure is already complicated enough, so it’s important to have a tool that makes the topic approachable. There is logic behind the colors: cards are outlined based on their category (router, switch, host, etc.), and emojis represent the type of equipment you’re looking at.
     </p>
 
-    <img src="/src/images/network_portal_ux/horn-emoji.png" alt="Voice equipment emoji" />
+    <img src="/images/network_portal_ux/horn-emoji.png" alt="Voice equipment emoji" />
 
     <h3>Switch Visualization</h3>
 
@@ -93,57 +93,57 @@
       So we made the tool a mirror image of the interface they faced in real life: the front of the switch, all ports visible. The technician should immediately know what’s connected where.
     </p>
 
-    <img src="/src/images/network_portal_ux/basic-view.png" alt="Switch main view" />
+    <img src="/images/network_portal_ux/basic-view.png" alt="Switch main view" />
 
     <p>
       The biggest requirement was being able to hover over and getting info on what VLAN was configured (think what rules apply to equipment connected to this port) and whether the connection was up or not. This inspired using colors per VLAN, and adding small green/red lines to port overlays to indicate operating status.
     </p>
 
-    <img src="/src/images/network_portal_ux/vlan-port-view.png" alt="VLANs and ports" />
+    <img src="/images/network_portal_ux/vlan-port-view.png" alt="VLANs and ports" />
 
     <p>
         If something is connected on one of the port's VLANs, the respective VLAN color becomes more opaque.
     </p>
 
-    <img src="/src/images/network_portal_ux/intuitive-coloring.png" alt="Colors!" />
+    <img src="/images/network_portal_ux/intuitive-coloring.png" alt="Colors!" />
 
     <p>
       Another important feature was to add stacks. In networks, you can stack multiple physical switches into one virtual one with (it follows) more ports. Such switches share an IP address, and are managed by a “master” switch, the first one in the stack. If a technician looks up a stack, all members are returned, complete with chassis info to differentiate between them:
     </p>
 
-    <img src="/src/images/network_portal_ux/stack.png" alt="Stack example" />
+    <img src="/images/network_portal_ux/stack.png" alt="Stack example" />
 
     <p>
       Next, I integrated a table of protocol-discoverable (CDP) neighboring equipment. All of these are visible on some port; on hover/click the corresponding port lights up.
     </p>
 
-    <img src="/src/images/network_portal_ux/cdp.png" alt="CDP view" />
+    <img src="/images/network_portal_ux/cdp.png" alt="CDP view" />
 
     <p>
       An extra feature I integrated was maps. Once you have the view, you can open the switch’s location either in Google Maps, or, using Swiss coordinates, on a custom cantonal map that includes links between equipment.
     </p>
 
-    <img src="/src/images/network_portal_ux/location.png" alt="Map options" />
+    <img src="/images/network_portal_ux/location.png" alt="Map options" />
 
     <p>
       Once I had all that done, I started finetuning the site with technicians and engineers. We added a MAC search bar (shows you what port a MAC address is connected on), an ALL/UP/DOWN filter view relating to port operational stati, and clickable VLANs (also filter ports).
     </p>
 
-    <img src="/src/images/network_portal_ux/mac-search.png" alt="MAC address search" />
+    <img src="/images/network_portal_ux/mac-search.png" alt="MAC address search" />
 
-    <img src="/src/images/network_portal_ux/vlan-select.png" alt="You can select VLANs" />
+    <img src="/images/network_portal_ux/vlan-select.png" alt="You can select VLANs" />
 
     <p>
       Later, I added a “Suggest Disconnect” button that, given a VLAN, finds the port configured with that VLAN that’s been down for the longest time. It models the technician’s most common use case: needing to disconnect a cable to branch a new one, but having no idea which cable he can pull.
     </p>
 
-    <img src="/src/images/network_portal_ux/disconnect.png" alt="Suggest disconnections" />
+    <img src="/images/network_portal_ux/disconnect.png" alt="Suggest disconnections" />
 
     <p>
       And finally, we augmented each port with in- and outgoing packet discard and error statistics. This gives the user significant context when troubleshooting a port: for example, if a customer calls in with a faulty laptop and you see two laptops behind one port and a lot of discarded packets, you can be pretty sure they’ve installed a small switch that can’t handle the traffic.
     </p>
 
-    <img src="/src/images/network_portal_ux/packet-stats.png" alt="Interface stat matrix" />
+    <img src="/images/network_portal_ux/packet-stats.png" alt="Interface stat matrix" />
 
     <p>
       In summary, the tool anticipates and intuitively displays all features technicians and other team members could possibly need when configuring switches and branching new equipment. The tool is set to launch in January, but has received a lot of positive feedback from early testers. Most importantly, it gives technicians independence: they no longer need administrators to gather info for them. This gives the administrators more freedom to do higher-priority tasks, and the technicians peace of mind and and independent agency.
@@ -159,19 +159,19 @@
       To that end, I created a simple central portal website. Initially, it had a black background and very straightforward interface: enter an IP address, select a tool, and you’re off.
     </p>
 
-    <img src="/src/images/network_portal_ux/raw.png" alt="First web interface" />
+    <img src="/images/network_portal_ux/raw.png" alt="First web interface" />
 
     <p>
       At some point, I thought the black background was kinda boring. It was riding the line of looking like every other IT network tool. An engineer wouldn’t take a second look at it; the dull background wouldn’t make me want to use the tool more. So I decided to add a background and little dragon emoji (which we determined was the canton’s new mascot).
     </p>
 
-    <img src="/src/images/network_portal_ux/background.png" alt="Adding the city" />
+    <img src="/images/network_portal_ux/background.png" alt="Adding the city" />
 
     <p>
       I then wanted to add a bit of wonder to the tool, a little more intrigue. The whole thing was still a little static. Inspired by the “Disney-like” quality I had asked the image generation tool to recreate for the background, I inlined some JavaScript to add little glowing yellow lights, fireflies. They moved around the screen slowly, oscillating their glow. It made the portal seem a bit more magical.
     </p>
 
-    <img src="/src/images/network_portal_ux/fireflies.png" alt="Owl city now" />
+    <img src="/images/network_portal_ux/fireflies.png" alt="Owl city now" />
 
     <p>
       I was satisfied about effects for the time being. Next, I looked at ways I could improve the usage of the platform as a whole. Up until that point, I hadn’t integrated any feedback in terms of whether the backend was working on your request. Because not all equipment takes equally long to scan (long paths take longer than short ones; same goes for stacked equipment visualization), users might get impatient if they don’t know that the process is running, and click reload before it terminates.
@@ -181,19 +181,19 @@
       To preempt this, I created loading screens with animations to play after launching a tool. They run whenever you change screens and really calmed me down.
     </p>
 
-    <img src="/src/images/network_portal_ux/loading.png" alt="Loading screens for user feedback" />
+    <img src="/images/network_portal_ux/loading.png" alt="Loading screens for user feedback" />
 
     <p>
       I also added intuitive error views that give users an indication of what’s going wrong backend, so that (should a tool fail) they can troubleshoot efficiently.
     </p>
 
-    <img src="/src/images/network_portal_ux/error.png" alt="Error detail" />
+    <img src="/images/network_portal_ux/error.png" alt="Error detail" />
 
     <p>
       Next, my boss asked whether I could implement multiple language support, and make the default language French (I built the tool in English bc my network-infrastructure French isn’t quite there yet). So with the team’s help and some DeepL, I created French, Portuguese and Swiss German translations (sorry about the pixelation, poor bee):
     </p>
 
-    <img src="/src/images/network_portal_ux/language-support.png" alt="Pixelated language selection" />
+    <img src="/images/network_portal_ux/language-support.png" alt="Pixelated language selection" />
 
     <p>
       I then interviewed a few engineers and watched them process customer calls with the tool. I realized they’d often switch between views: for example, they’d use the pathfinder to check the path, memorize the last switch in the chain, and then query the switch visualizer with that IP. Maybe check out other neighbors of the switch.
@@ -207,37 +207,37 @@
       On the pathfinder, I added links in info-cards next to switches that took you straight to the port visualization of that switch:
     </p>
 
-    <img src="/src/images/network_portal_ux/pathfinder-link.png" alt="Link to switch viz" />
+    <img src="/images/network_portal_ux/pathfinder-link.png" alt="Link to switch viz" />
 
     <p>
       On the visualizer, I added links next to discovered neighbors. While these don’t necessarily cover all possible neighbors, it’s a very intuitive place to link them in the layout. And translating every discovered MAC per port would mean a lot of ARP table lookups on the router, which would create a dependency on a big database lookup. It could be done though?
     </p>
 
-    <img src="/src/images/network_portal_ux/swiz-link.png" alt="Link to neighbor's path" />
+    <img src="/images/network_portal_ux/swiz-link.png" alt="Link to neighbor's path" />
 
     <p>
       After all that efficiency implementing, I went back to the landing page. I wanted it to feel more alive; a wintry background wouldn’t always be fitting, and might get a little old after a while.
     </p>
 
-    <img src="/src/images/network_portal_ux/winter.png" alt="It's cold outside" />
+    <img src="/images/network_portal_ux/winter.png" alt="It's cold outside" />
 
     <p>
       So inspired by my initial firefly design, we built seasonal effects: new backgrounds of the city in different seasons, complete with special effects per time of year.
     </p>
 
-    <img src="/src/images/network_portal_ux/spring.png" alt="Rainy skies" />
+    <img src="/images/network_portal_ux/spring.png" alt="Rainy skies" />
 
     <p>
       This included falling snowflakes in winter (approximated with white circles), rain in spring, buzzing bees (inspired by a local hockey club’s logo) in summer, and falling leaves in autumn.
     </p>
 
-    <img src="/src/images/network_portal_ux/summer.png" alt="Beesiness" />
+    <img src="/images/network_portal_ux/summer.png" alt="Beesiness" />
 
     <p>
       Each “particle” - flakes, rain, bees, and leaves - was given a different motion based on embedded JavaScript formulas. Snowflakes fell lightly, swaying; for leaves, the number of particles was reduced, and swaying was intensified. To approximate bees buzzing, I varied velocity and added random directional switches, where the bee image would invert to match the direction it was flying in.
     </p>
 
-    <img src="/src/images/network_portal_ux/fall.png" alt="Pink and white" />
+    <img src="/images/network_portal_ux/fall.png" alt="Pink and white" />
 
     <p>
       The pink sky in fall is inspired by my views of the mountains’ silhouettes on morning runs by the lake. When it’s fall and not foggy, Neuchâtel is beautiful. The picture doesn’t capture it uwu.
@@ -253,13 +253,13 @@
       But the team there was great, and I wanted to give them a tribute. So for each of the engineers in my office, I created special views, set to show on their birthdays. Kinda inspired by those alternate spellings of “Google” on Halloween or Christmas.
     </p>
 
-    <img src="/src/images/network_portal_ux/yayoi.png" alt="I love pumpkins too" />
+    <img src="/images/network_portal_ux/yayoi.png" alt="I love pumpkins too" />
 
     <p>
       This one’s for Jerome. His wife and he really like Yayoi Kusama, so I thought I’d theme it after her artwork, with all the polka dots and a floating pumpkin. I added a colorful sparkle effect to make it pop.
     </p>
 
-    <img src="/src/images/network_portal_ux/canada.png" alt="Back in the 6ix" />
+    <img src="/images/network_portal_ux/canada.png" alt="Back in the 6ix" />
 
     <p>
       And here’s one I left for my birthday. I guess it’s kinda my stamp on the work.
