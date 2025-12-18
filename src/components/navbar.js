@@ -12,13 +12,13 @@ class SiteNavbar extends HTMLElement {
         <div class="nav-right">
           <a href="/projects.html">Projects</a>
           <a href="/about.html">About</a>
-          <a href="https://github.com/yourname" aria-label="GitHub">
+          <a href="https://github.com/jofras" aria-label="GitHub">
             <i data-lucide="github"></i>
           </a>
-          <a href="mailto:you@email.com" aria-label="Email">
+          <a href="mailto:jonfquinn@proton.me" aria-label="Email">
             <i data-lucide="mail"></i>
           </a>
-          <a href="/public/cv.pdf" aria-label="Download CV">
+          <a href="/cv.pdf" aria-label="Download CV">
             <i data-lucide="file-user"></i>
           </a>
           <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">
