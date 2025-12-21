@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+
+  <title>3D Graphics Pipeline</title>
+
+
+  <script type="module" crossorigin src="/assets/main-C7uEwHCZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-renB4jpI.css">
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="article">
+    <h1>3D Graphics Pipeline</h1>
+    <p class="subtitle">
+      Built a full interactive 3D graphics pipeline as part of the graphics fundamentals course at Purdue.
+    </p>
+
+    <img src="/images/project4.jpg" alt="Title image" />
+
+    <h2>Motivation</h2>
+
+    <p>
+      I’ve always been quite interested in visual things, whether at art class, the movies, or in games. Light shows at concerts, et cetera. I also like linear algebra. So when the opportunity presented itself to do a hands-on graphics course while on exchange (the one at ETH is pretty theoretical), I jumped on it.
+    </p>
+
+    <p>
+      Our goal was to start from absolute scratch (blank code files) and build an interactive (i.e., controllable camera) 3D graphics engine by the end of term. It’s one of the harder senior CS courses at Purdue. I hadn’t done too much C++ and my linear algebra was a little rusty, so I got a little nervous.
+    </p>
+
+    <h2>Design</h2>
+
+    <p>
+      The course was pretty much purely implementation-based. In lectures, we’d discuss different approaches to each new feature, the prof’s IDE projected up front.
+    </p>
+
+    <p>
+      We started off with basic vector and matrix operations; defining Vector and Matrix objects in C++ and basic operations, plus rotations, projections et cetera. In parallel, we set up the framebuffer to view the objects we were going to project. One of the first assignments was creating a few shapes and making part of your name fly across the screen:
+    </p>
+
+    <img src="/images/graphics_project/basic-shapes.png" alt="Name flying across screen" />
+
+    <p>
+      Pretty soon after that, we started loading predefined point clouds into our programs and trying to create the wireframes for them. We also added basic camera operations like zooming, panning, and tilts. Here’s a screenshot from the assignment video that week:
+    </p>
+
+    <img src="/images/graphics_project/wireframe.png" alt="Wireframe camera assignment" />
+
+    <p>
+      Next, we worked on filling in the teapot, as well as more camera operations: moving the camera’s position in space, forward, backward, spinning and sideways. Plus defining interpolated routes combining multiple camera ops.
+    </p>
+
+    <img src="/images/graphics_project/teapot-in-motion.png" alt="Colorful teapot in motion" />
+
+    <p>
+      Now that we had a fully-functional camera and the ability to rasterize objects, it was time to add a (moving) light source. We studied multiple lighting methods based on different normal vectors and so on. It took me a few tries to get it right:
+    </p>
+
+    <img src="/images/graphics_project/botched-light.png" alt="Early lighting attempt" />
+
+    <p>
+      Here’s a little evolution:
+    </p>
+
+    <img src="/images/graphics_project/teapot-in-motion.png" alt="Lighting evolution" />
+
+    <p>
+      And eventually I got it right:
+    </p>
+
+    <img src="/images/graphics_project/rotating-light.png" alt="Successful lighting" />
+
+    <p>
+      So that was great. But then we wanted to start mapping more realistic environments; for this, we required textures. The first assignment was to get textures to move around with surfaces:
+    </p>
+
+    <img src="/images/graphics_project/textures.png" alt="Spinning textures" />
+
+    <p>
+      After that, we got to my favorite part: environment maps. Our course focused on cubemaps. I really liked thinking about the required projections and implementing them. If your cube doesn’t look that unified, you get some weird images:
+    </p>
+
+    <img src="/images/graphics_project/interesting-cubemap.png" alt="Interesting cubemap" />
+
+    <p>
+      That one’s from a late night library hustle pre intramural soccer (which was always insanely late at night).
+    </p>
+
+    <p>
+      But when you actually make a nice cube, you get pretty realistic results:
+    </p>
+
+    <img src="/images/graphics_project/cubemap.png" alt="Pretty cubemap" />
+
+    <p>
+      In the final weeks, we looked into lower-level OpenGL shaders and analyzed frame rates. This was kinda sick and a little challenging, but seeing the framerate accelerate was cool. We got textures and all our other code working and tested for speed:
+    </p>
+
+    <img src="/images/graphics_project/framerate.png" alt="OpenGL framerate testing" />
+
+    <p>
+      And then the semester was over.
+    </p>
+
+    <h2>Results</h2>
+
+    <p>
+      This project taught me so much. Not only about graphics, but about linear algebra, coding in C++, and working with other students, bouncing ideas off each other, comparing engines.
+    </p>
+
+    <p>
+      It also taught me to schedule my work better. As I was on exchange, I was travelling a lot, especially given I had Mondays and Fridays off (long weekends every weekend). Deadlines were Wednesdays at noon. A lot of these features were built at 2AM on a Tuesday upon getting back from O’Hare after a weekend trip. But as the semester progressed, I started working on the new projects earlier and earlier in the week, eventually not getting too stressed anymore.
+    </p>
+
+    <p>
+      I really enjoyed the course and would recommend it to anyone going to Purdue. It’s some of the most fulfilling work I did during my bachelor’s. It’s cool to have visual feedback instead of (or next to) error messages when debugging.
+    </p>
+
+  </main>
+</body>
+</html>
