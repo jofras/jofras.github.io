@@ -14,8 +14,6 @@ export default defineConfig({
         project2: 'project-2.html',
         project3: 'project-3.html',
         project4: 'project-4.html',
-        // Add project-4 if you created it, otherwise remove this line
-        // project4: 'project-4.html', 
       }
     }
   }
