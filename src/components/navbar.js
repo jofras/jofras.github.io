@@ -18,7 +18,7 @@ class SiteNavbar extends HTMLElement {
           <a href="mailto:jonfquinn@proton.me" aria-label="Email">
             <i data-lucide="mail"></i>
           </a>
-          <a href="/cv.pdf" aria-label="Download CV">
+          <a href="/CV-quinn-jonathan.pdf" aria-label="Download CV">
             <i data-lucide="file-user"></i>
           </a>
           <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">
