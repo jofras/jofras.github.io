@@ -3,25 +3,36 @@ import { createIcons, Github, Mail, FileUser, Moon, Sun } from "lucide";
 class SiteNavbar extends HTMLElement {
   connectedCallback() {
     const isDark = document.documentElement.dataset.theme === "dark";
+    const path = window.location.pathname;
+
+    const isActive = (href) => {
+      if (href === "/") return path === "/" || path === "/index.html";
+      return path === href || path.startsWith(href.replace(".html", ""));
+    };
+
+    const link = (href, label) =>
+      `<a href="${href}" class="${isActive(href) ? "active" : ""}">${label}</a>`;
 
     this.innerHTML = `
       <nav class="navbar">
-        <div class="nav-left">
-          <a href="/">Jonathan Quinn</a>
+        <a class="nav-logo" href="/">Jonathan Quinn</a>
+        <div class="nav-links">
+          ${link("/projects.html", "Projects")}
+          ${link("/timeline.html", "Timeline")}
+          ${link("/blog.html", "Writing")}
+          ${link("/about.html", "About")}
         </div>
-        <div class="nav-right">
-          <a href="/projects.html">Projects</a>
-          <a href="/about.html">About</a>
-          <a href="https://github.com/jofras" aria-label="GitHub">
+        <div class="nav-icons">
+          <a class="icon-btn" href="https://github.com/jofras" target="_blank" rel="noopener" aria-label="GitHub">
             <i data-lucide="github"></i>
           </a>
-          <a href="mailto:jonfquinn@proton.me" aria-label="Email">
+          <a class="icon-btn" href="mailto:jonfquinn@proton.me" aria-label="Email">
             <i data-lucide="mail"></i>
           </a>
-          <a href="/CV-quinn-jonathan.pdf" aria-label="Download CV">
+          <a class="icon-btn" href="/cv_jq_current.pdf" aria-label="Download CV">
             <i data-lucide="file-user"></i>
           </a>
-          <button class="icon-button" id="theme-toggle" aria-label="Toggle theme">
+          <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
             <i data-lucide="${isDark ? "sun" : "moon"}"></i>
           </button>
         </div>
@@ -33,9 +44,7 @@ class SiteNavbar extends HTMLElement {
   }
 
   renderIcons() {
-    createIcons({
-      icons: { Github, Mail, FileUser, Moon, Sun }
-    });
+    createIcons({ icons: { Github, Mail, FileUser, Moon, Sun } });
   }
 
   setupThemeToggle() {
@@ -51,7 +60,6 @@ class SiteNavbar extends HTMLElement {
         localStorage.setItem("theme", "dark");
       }
 
-      // Re-render navbar to guarantee icon sync
       this.connectedCallback();
     });
   }

@@ -2,57 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   </script>
-
   <title>Jonathan Quinn</title>
-  <script type="module" crossorigin src="/assets/main-DCLlry_R.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-renB4jpI.css">
+  <script type="module" crossorigin src="/assets/main-bD9jRX-k.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BrZZrBNx.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Why hello there.</h1>
-      <p>
-        A small collection of projects exploring theory, systems and design.
-      </p>
-    </section>
+  <!-- HERO -->
+  <section class="landing-hero">
+    <div class="hero-eyebrow reveal">Jonathan Quinn</div>
+    <h1 class="hero-title reveal reveal-delay-1">
+      hey you!<span class="hero-cursor">_</span>
+    </h1>
+    <p class="hero-tagline reveal reveal-delay-2">
+      Welcome to my personal website. 
+    </p>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>scroll</span>
+      <svg viewBox="0 0 12 12">
+        <polyline points="2,4 6,8 10,4" />
+      </svg>
+    </div>
+  </section>
 
-    <section class="projects">
+  <!-- 01 — PROJECTS -->
+  <section class="landing-section">
+    <div class="section-bg-number" aria-hidden="true">01</div>
+    <div class="section-label reveal">Projects</div>
+    <div class="section-header reveal reveal-delay-1">
+      <h2 class="section-title">Selected Work</h2>
+      <a href="/projects.html" class="cta-link">View all <span class="arrow">→</span></a>
+    </div>
+    <p class="section-teaser reveal reveal-delay-2">
+      Research and side projects, from data pipelines to voice journaling.
+    </p>
+    <div class="landing-cards reveal reveal-delay-3">
       <project-card
         title="Lost in Transcription"
         tagline="My bachelor's thesis on ASR hallucinations."
         image="/images/project1.jpg"
         link="/project-1.html">
       </project-card>
-
       <project-card
         title="Network Portal"
         tagline="Diagnostic tools for the Canton of Neuchâtel."
         image="/images/project2.jpg"
         link="/project-2.html">
       </project-card>
+    </div>
+  </section>
 
-      <project-card
-        title="3Steps Athletics"
-        tagline="A hockey camp website for a friend."
-        image="/images/project3.jpg"
-        link="/project-3.html">
-      </project-card>
+  <!-- 02 — TIMELINE -->
+  <section class="landing-section">
+    <div class="section-bg-number" aria-hidden="true">02</div>
+    <div class="section-label reveal">Timeline</div>
+    <div class="section-header reveal reveal-delay-1">
+      <h2 class="section-title">The Journey</h2>
+      <a href="/timeline.html" class="cta-link">Full timeline <span class="arrow">→</span></a>
+    </div>
+    <p class="section-teaser reveal reveal-delay-2">
+      From biology to computers to the hospital.
+    </p>
+    <div class="timeline-snippet reveal reveal-delay-3">
+      <div class="ts-item">
+        <div class="ts-year">Late 2025</div>
+        <div class="ts-title">Software Engineering Intern</div>
+        <div class="ts-desc">Network tooling for the Canton of Neuchâtel</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-year"> Mid 2025</div>
+        <div class="ts-title">Bachelor's Thesis, ETH Zurich</div>
+        <div class="ts-desc">ASR hallucinations &amp; word embeddings, Rycolab</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-year">Late 2024</div>
+        <div class="ts-title">Exchange Semester, Purdue University</div>
+        <div class="ts-desc">3D graphics, triathlon club, roadtripping</div>
+      </div>
+    </div>
+  </section>
 
-      <project-card
-        title="3D Graphics Pipeline"
-        tagline="An interactive engine as part of my computer graphics fundamentals course."
-        image="/images/project4.jpg"
-        link="/project-4.html">
-      </project-card>
-    </section>
-  </main>
+  <!-- 03 — WRITING -->
+  <section class="landing-section">
+    <div class="section-bg-number" aria-hidden="true">03</div>
+    <div class="section-label reveal">Writing</div>
+    <div class="section-header reveal reveal-delay-1">
+      <h2 class="section-title">Notes &amp; Thoughts</h2>
+      <a href="/blog.html" class="cta-link">Read more <span class="arrow">→</span></a>
+    </div>
+    <p class="section-teaser reveal reveal-delay-2">
+      Occasional writing on design, technology, and whatever else seems worth putting into words.
+    </p>
+    <div class="post-stubs reveal reveal-delay-3">
+      <div class="post-stub">
+        <div class="post-stub-inner">
+          <div class="post-stub-title">Ghost in the Machine</div>
+          <div class="post-stub-desc">A thesis detour that ended up being the whole point.</div>
+        </div>
+        <div class="post-stub-date">Mar 2026</div>
+      </div>
+      <div class="post-stub">
+        <div class="post-stub-inner">
+          <div class="post-stub-title">On making tools feel human</div>
+          <div class="post-stub-desc">People use things that are fun to use.</div>
+        </div>
+        <div class="post-stub-date">Mar 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — ABOUT -->
+  <section class="landing-section">
+    <div class="section-bg-number" aria-hidden="true">04</div>
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal reveal-delay-1">The Dude Behind the Work</h2>
+    <div class="about-mini reveal reveal-delay-2">
+      <div>
+        <p>
+          CS graduate from ETH Zurich. I like building things by interacting with the people I'm building for, optimizing across the stack, and diving deep into research questions.
+          Currently learning French and planning a master's in neuroscience.
+        </p>
+        <a href="/about.html" class="cta-link">Learn more <span class="arrow">→</span></a>
+      </div>
+      <div class="about-mini-photo">
+        <img src="/images/me.jpg" alt="Jonathan Quinn" />
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
 </body>
 </html>

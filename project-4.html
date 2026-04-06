@@ -2,128 +2,181 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   </script>
-
-  <title>3D Graphics Pipeline</title>
-
+  <title>3D Graphics Pipeline — Jonathan Quinn</title>
   <link rel="stylesheet" href="/src/style.css" />
-
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
   <site-navbar></site-navbar>
 
-  <main class="article">
-    <h1>3D Graphics Pipeline</h1>
-    <p class="subtitle">
-      Built a full interactive 3D graphics pipeline as part of the graphics fundamentals course at Purdue.
-    </p>
+  <main class="project-article">
 
-    <img src="/images/project4.jpg" alt="Title image" />
+    <div class="project-header reveal">
+      <h1>3D Graphics Pipeline</h1>
+      <p class="subtitle">
+        Built a full interactive 3D graphics pipeline as part of the graphics fundamentals course at Purdue.
+      </p>
+    </div>
 
-    <h2>Motivation</h2>
-
-    <p>
-      I’ve always been quite interested in visual things, whether at art class, the movies, or in games. Light shows at concerts, et cetera. I also like linear algebra. So when the opportunity presented itself to do a hands-on graphics course while on exchange (the one at ETH is pretty theoretical), I jumped on it.
-    </p>
-
-    <p>
-      Our goal was to start from absolute scratch (blank code files) and build an interactive (i.e., controllable camera) 3D graphics engine by the end of term. It’s one of the harder senior CS courses at Purdue. I hadn’t done too much C++ and my linear algebra was a little rusty, so I got a little nervous.
-    </p>
+    <!-- Intro + hero image -->
+    <div class="spread spread-right reveal">
+      <div class="spread-text">
+        <p>
+          I've always been quite interested in visual things — whether at art class, the movies, or in games. Light shows at concerts, et cetera. I also like linear algebra. So when the opportunity presented itself to do a hands-on graphics course while on exchange (the one at ETH is pretty theoretical), I jumped on it.
+        </p>
+        <p>
+          Our goal was to start from absolute scratch (blank code files) and build an interactive (i.e., controllable camera) 3D graphics engine by the end of term. It's one of the harder senior CS courses at Purdue. I hadn't done too much C++ and my linear algebra was a little rusty, so I got a little nervous.
+        </p>
+        <p>
+          The course was pretty much purely implementation-based. In lectures, we'd discuss different approaches to each new feature, the prof's IDE projected up front.
+        </p>
+      </div>
+      <div class="spread-image">
+        <img src="/images/project4.jpg" alt="Graphics pipeline title render" />
+      </div>
+    </div>
 
     <h2>Design</h2>
 
-    <p>
-      The course was pretty much purely implementation-based. In lectures, we’d discuss different approaches to each new feature, the prof’s IDE projected up front.
-    </p>
+    <h3>Basic Shapes &amp; Camera</h3>
 
-    <p>
-      We started off with basic vector and matrix operations; defining Vector and Matrix objects in C++ and basic operations, plus rotations, projections et cetera. In parallel, we set up the framebuffer to view the objects we were going to project. One of the first assignments was creating a few shapes and making part of your name fly across the screen:
-    </p>
+    <!-- Basic shapes: image left, text right -->
+    <div class="spread spread-left reveal">
+      <div class="spread-image">
+        <img src="/images/graphics_project/basic-shapes.png" alt="Name flying across screen" />
+      </div>
+      <div class="spread-text">
+        <p>
+          We started off with basic vector and matrix operations — defining Vector and Matrix objects in C++ and basic operations, plus rotations, projections et cetera. In parallel, we set up the framebuffer to view the objects we were going to project.
+        </p>
+        <p>
+          One of the first assignments was creating a few shapes and making part of your name fly across the screen. Grounding in the basics before anything interesting.
+        </p>
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/basic-shapes.png" alt="Name flying across screen" />
+    <h3>Wireframes &amp; Camera Operations</h3>
 
-    <p>
-      Pretty soon after that, we started loading predefined point clouds into our programs and trying to create the wireframes for them. We also added basic camera operations like zooming, panning, and tilts. Here’s a screenshot from the assignment video that week:
-    </p>
+    <!-- Wireframe: text left, image right -->
+    <div class="spread spread-right reveal">
+      <div class="spread-text">
+        <p>
+          Pretty soon after that, we started loading predefined point clouds into our programs and trying to create the wireframes for them. We also added basic camera operations like zooming, panning, and tilts.
+        </p>
+      </div>
+      <div class="spread-image">
+        <img src="/images/graphics_project/wireframe.png" alt="Wireframe camera assignment" />
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/wireframe.png" alt="Wireframe camera assignment" />
+    <h3>Filled Objects &amp; Full Camera</h3>
 
-    <p>
-      Next, we worked on filling in the teapot, as well as more camera operations: moving the camera’s position in space, forward, backward, spinning and sideways. Plus defining interpolated routes combining multiple camera ops.
-    </p>
+    <!-- Teapot: image left, text right -->
+    <div class="spread spread-left reveal">
+      <div class="spread-image">
+        <img src="/images/graphics_project/teapot-in-motion.png" alt="Colorful teapot in motion" />
+      </div>
+      <div class="spread-text">
+        <p>
+          Next, we worked on filling in the teapot, as well as more camera operations: moving the camera's position in space, forward, backward, spinning and sideways. Plus defining interpolated routes combining multiple camera ops.
+        </p>
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/teapot-in-motion.png" alt="Colorful teapot in motion" />
+    <h3>Lighting</h3>
 
-    <p>
-      Now that we had a fully-functional camera and the ability to rasterize objects, it was time to add a (moving) light source. We studied multiple lighting methods based on different normal vectors and so on. It took me a few tries to get it right:
-    </p>
+    <!-- Lighting: text left, images right -->
+    <div class="spread spread-right reveal">
+      <div class="spread-text">
+        <p>
+          Now that we had a fully-functional camera and the ability to rasterize objects, it was time to add a (moving) light source. We studied multiple lighting methods based on different normal vectors and so on. It took me a few tries to get it right.
+        </p>
+        <p>
+          The first attempt was a little rough. But eventually I got there.
+        </p>
+      </div>
+      <div class="spread-image">
+        <img src="/images/graphics_project/botched-light.png" alt="Early lighting attempt" />
+        <img src="/images/graphics_project/rotating-light.png" alt="Successful rotating lighting" />
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/botched-light.png" alt="Early lighting attempt" />
+    <h3>Textures</h3>
 
-    <p>
-      Here’s a little evolution:
-    </p>
+    <!-- Textures: image left, text right -->
+    <div class="spread spread-left reveal">
+      <div class="spread-image">
+        <img src="/images/graphics_project/textures.png" alt="Spinning textures" />
+      </div>
+      <div class="spread-text">
+        <p>
+          Once we had lighting down, we wanted to start mapping more realistic environments. For this, we required textures. The first assignment was to get textures to move around with surfaces — mapping 2D images onto 3D geometry.
+        </p>
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/teapot-in-motion.png" alt="Lighting evolution" />
+    <h3>Environment Maps</h3>
 
-    <p>
-      And eventually I got it right:
-    </p>
+    <!-- Cubemaps: text left, images right -->
+    <div class="spread spread-right reveal">
+      <div class="spread-text">
+        <p>
+          After that, we got to my favorite part: environment maps. Our course focused on cubemaps. I really liked thinking about the required projections and implementing them.
+        </p>
+        <p>
+          If your cube doesn't quite fit together, you get some interesting artifacts. That one's from a late night library hustle before intramural soccer (which was always insanely late at night at Purdue).
+        </p>
+        <p>
+          But when you actually make a nice cube, you get pretty realistic results — reflections, environment lighting, the whole thing.
+        </p>
+      </div>
+      <div class="spread-image">
+        <img src="/images/graphics_project/interesting-cubemap.png" alt="Glitchy cubemap" />
+        <img src="/images/graphics_project/cubemap.png" alt="Pretty cubemap" />
+      </div>
+    </div>
 
-    <img src="/images/graphics_project/rotating-light.png" alt="Successful lighting" />
+    <h3>OpenGL Shaders &amp; Framerate</h3>
 
-    <p>
-      So that was great. But then we wanted to start mapping more realistic environments; for this, we required textures. The first assignment was to get textures to move around with surfaces:
-    </p>
-
-    <img src="/images/graphics_project/textures.png" alt="Spinning textures" />
-
-    <p>
-      After that, we got to my favorite part: environment maps. Our course focused on cubemaps. I really liked thinking about the required projections and implementing them. If your cube doesn’t look that unified, you get some weird images:
-    </p>
-
-    <img src="/images/graphics_project/interesting-cubemap.png" alt="Interesting cubemap" />
-
-    <p>
-      That one’s from a late night library hustle pre intramural soccer (which was always insanely late at night).
-    </p>
-
-    <p>
-      But when you actually make a nice cube, you get pretty realistic results:
-    </p>
-
-    <img src="/images/graphics_project/cubemap.png" alt="Pretty cubemap" />
-
-    <p>
-      In the final weeks, we looked into lower-level OpenGL shaders and analyzed frame rates. This was kinda sick and a little challenging, but seeing the framerate accelerate was cool. We got textures and all our other code working and tested for speed:
-    </p>
-
-    <img src="/images/graphics_project/framerate.png" alt="OpenGL framerate testing" />
-
-    <p>
-      And then the semester was over.
-    </p>
+    <!-- Shaders: image left, text right -->
+    <div class="spread spread-left reveal">
+      <div class="spread-image">
+        <img src="/images/graphics_project/framerate.png" alt="OpenGL framerate testing" />
+      </div>
+      <div class="spread-text">
+        <p>
+          In the final weeks, we looked into lower-level OpenGL shaders and analyzed frame rates. This was kinda sick and a little challenging, but seeing the framerate accelerate was cool. We got textures and all our other code working and tested for speed.
+        </p>
+        <p>
+          And then the semester was over.
+        </p>
+      </div>
+    </div>
 
     <h2>Results</h2>
 
-    <p>
-      This project taught me so much. Not only about graphics, but about linear algebra, coding in C++, and working with other students, bouncing ideas off each other, comparing engines.
-    </p>
-
-    <p>
-      It also taught me to schedule my work better. As I was on exchange, I was travelling a lot, especially given I had Mondays and Fridays off (long weekends every weekend). Deadlines were Wednesdays at noon. A lot of these features were built at 2AM on a Tuesday upon getting back from O’Hare after a weekend trip. But as the semester progressed, I started working on the new projects earlier and earlier in the week, eventually not getting too stressed anymore.
-    </p>
-
-    <p>
-      I really enjoyed the course and would recommend it to anyone going to Purdue. It’s some of the most fulfilling work I did during my bachelor’s. It’s cool to have visual feedback instead of (or next to) error messages when debugging.
-    </p>
+    <div class="spread-text-only reveal">
+      <p>
+        This project taught me so much. Not only about graphics, but about linear algebra, coding in C++, and working with other students, bouncing ideas off each other, comparing engines.
+      </p>
+      <p>
+        It also taught me to schedule my work better. As I was on exchange, I was travelling a lot — long weekends every weekend, deadlines on Wednesdays at noon. A lot of these features were built at 2AM on a Tuesday upon getting back from O'Hare after a weekend trip. But as the semester progressed, I started working on the new projects earlier and earlier in the week, eventually not getting too stressed anymore.
+      </p>
+      <p>
+        I really enjoyed the course and would recommend it to anyone going to Purdue. It's some of the most fulfilling work I did during my bachelor's. It's cool to have visual feedback instead of (or next to) error messages when debugging.
+      </p>
+    </div>
 
   </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
 </body>
 </html>

@@ -1,0 +1,118 @@
+<!--
+  ============================================================
+  HOW TO CREATE A NEW BLOG POST
+  ============================================================
+
+  1. Duplicate this file. Name it something like:
+       blog-your-title-here.html
+
+  2. Update the <title> tag (line ~10).
+
+  3. Fill in the post metadata in .blog-post-header:
+       - The h1 title
+       - The date (write it however you like, e.g. "March 2026")
+       - The read time (rough estimate, ~200 words/min)
+
+  4. Write your post in .blog-post-body.
+     Use <p> for paragraphs, <h2> for section breaks,
+     <blockquote> for pull quotes or callouts.
+
+  5. Add an entry in blog.html (the index):
+     Copy one of the existing .blog-entry divs,
+     update the title, description, date, and
+     change cursor: default → cursor: pointer and
+     wrap the whole entry in an <a href="..."> tag.
+
+  6. Add the new page to vite.config.js under rollupOptions.input:
+       blogPostSlug: 'blog-your-title-here.html',
+
+  That's it.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+  <title>Ghost in the Machine — Jonathan Quinn</title>
+  <script type="module" crossorigin src="/assets/main-bD9jRX-k.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BrZZrBNx.css">
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="blog-post">
+
+    <header class="blog-post-header reveal">
+      <h1>Ghost in the Machine</h1>
+      <div class="blog-post-meta">
+        <span>March 2026</span>
+        <span class="sep">·</span>
+        <span>5 min read</span>
+      </div>
+    </header>
+
+    <div class="blog-post-body reveal reveal-delay-1">
+
+      <p>For my bachelor's thesis, I wanted to do something in NLP. A few years back, I'd read Brian Christian's Alignment Problem, and I couldn't stop thinking about it. First, the moment Tolga Bolukbasi and Adam Kalai discovered Word2Vec was gender-biased; and second, ProPublica's blockbuster dissection of COMPAS's racist bail policy. I needed to get into that space where computers meet ethics.</p>
+
+<p>I have this one friend, Connor, who's not only super literate in all things ML but also a monster at the gym. (He's 6'6 and plays rugby.) We work out together sometimes, and in between sets we talk (or he talks and I listen because I'm about to collapse after his warm up set).</p>
+
+<p>So it was the beginning of the semester, I had just gotten back from America, and was looking for a lab and supervisors. Coincidentally, during his master's, he'd done research at Rycolab, Ryan Cotterell's NLP lab at ETH. Naturally, I was intrigued. He recommended I shoot them a mail and gracefully allowed me to include him as a reference, then announced the most excruciating sled push finisher ever was next up.</p>
+
+<p>Not being able to walk for the next few days, I sat down and started reading Rycolab papers. They were super interesting. I hadn't really heard of chain-of-thought at that point, so I included their research on that in my email, next to the Alignment Problem stuff. They got back to me within a few days, and within a week, organised a meeting with Alexander Hoyle, a new postdoc at Ryan's lab.</p>
+
+<p>I was so happy after that meeting. Alexander's NLP origin story mirrored mine exactly: His interest came after reading about gender bias in word vectors. He suggested I do something on that, e.g., implement classic embedding models, generate word vectors, and check them for bias. The "contribution" (we weren't sure that'd even be required) would be to use a novel corpus. I was pretty hyped. After a few emails back and forth, we decided to use the Structured Podcast Research Corpus (SPoRC), a huge (1.1 million episode) podcast dataset only recently compiled by Ben Litterer et al. at the University of Michigan.</p>
+
+<p>We had chosen SPoRC mainly because it was cool and new, and hadn't really thought about its size a priori. Fact is, I was working on my 8GB RAM MacBook Air. The download forced me to restructure my entire file system and delete a VM, Unity, and Visual Studio (good as it made me focus on my thesis and not my moonshot graphics ambitions). I mentioned it to Alexander in our next meeting, who was gobsmacked and suggested I just take a 200MB subset. But I was hooked. I had started thinking scaling hypothesis, wanting to get as representative an embedding of the podcast ecosystem as possible. And I felt kinda cool using a fat dataset.</p>
+
+<h2>The Tokenizer's Last Run</h2>
+
+<p>Fast forward a few weeks, I was in the approaching the end of my n-th preprocessing run, feeling like I'd finally found all contaminators in the transcripts, now removing them with my custom pipeline. (I was still working on my laptop, and despite optimizations, spaCy tokenization took days; for more info on cleaning/preprocessing ASR datasets see this article.) It was a beautiful morning, and while the tokenizer parsed the last few transcripts, I marvelled at the day's pink sunrise through ETH's chemistry-lab-turned-study-spot's high-rise windows.</p>
+
+<p>Straightaway, I inspected the tokenized text files, giddy and anxious at the same time. "I might actually be done tokenizing!!," I thought. At first, everything seemed fine: All that remained was alphanumeric characters and punctuation, no sign of non-speech audio markers. The cleaned transcripts seemed ready to be passed into Word2Vec. But as I looked closer, I noticed a pattern.</p>
+
+<p>First podcast, first line: "I am not going to get out of this," repeated enough times to venture past the edge of my editor window. Initially, I thought "okay, maybe this is a clip from someone panicking at a crime scene, the intro to a true crime podcast?" or something of the sort. The window fit around 5 repetitions max after all. To double check, I kept scrolling. More reps. Scroll, more. It didn't stop.</p>
+
+<p>My first instinct was to email my supervisor immediately. But I knew he'd be super busy (as supervisors so often are) and so instead, I decided to investigate the issue more deeply before escalating it to him. The pink clouds, sunrise, and its warm, golden light gave the lab a solemn, tranquil feel. In solitude, I decided to go deep. To the source. To listen to the actual podcast.</p>
+
+<p>Here's another great thing about SPoRC: It includes so much metadata. Speaker turns, URLs, frequencies, non-speech audio markers, you name it. I only really used the raw transcripts for my study, but there's so much more to be investigated here.</p>
+
+<p>Anyway, I went back to the source files, found said episode, pasted the URL into my browser, and pressed play. Split screening between the podcast player and Google Docs, I started transcribing, pressing pause ever so frequently to catch up (I think my last typing test was like 66 WPM).</p>
+
+<p>Next to the repeated runs (and some understandable mishearings; I still haven't deciphered the podcast's name), I noticed more subtle hallucinations: small deletions, or additions of sensical clauses never said. Due to the difficulty of finding such errors without listening to the podcast myself (or transcribing SPoRC with a less hallucinatory ASR model, which was infeasible given time constraints), I decided to focus on the repeated sentences. But imo, the former type would be super cool to investigate, and arguably more important to mitigate due to its subtlety.</p>
+
+<p>Back to transcription, where I had started colouring additions orange, deletions (which I'd transcribe) blue, and adding corrections in parentheses after mishearings. Contrary to expectations, the repeated sentence wasn't necessarily mentioned before Whisper (the OpenAI ASR model used to transcribe SPoRC) spiraled. And more importantly, these runs were overwriting genuine content. A lot of it. In total, for this episode, repeated runs overwrote approximately 1,720 words of content, or almost 30% of the podcast. Three of the repeated sentences were never said, and the average run was 114 sentences long.</p>
+
+<h2>What Was Being Erased</h2>
+
+<p>The episode wasn't just any episode. It dealt with racism and police brutality, recorded amidst the BLM movement in June 2020. The host addressed the murder of Ahmaud Arbery, the ex-student and runner shot while out on a run in Satilla Shores, GA, as well as the later murder of Breonna Taylor, an EMT worker killed unarmed by police in her home in Louisville, KT. It was heavy, gut-wrenching, emotionally charged. Hard to listen to. Heartbreaking.</p>
+
+<p>I took a break after finishing the transcript, then went back to analyse it. The passages overwritten by Whisper seemed especially charged. Thinking of ProPublica's COMPAS piece, I wondered whether the repeated runs, the overwrites, may be a form of censorship. Something to do with the moderation API. This hypothesis has not been tested; we were going to run topic and sentiment models on episodes and correlate their scores with hallucination intensity, but ran out of time. I will probably still do so (if I can somehow gain access to another HPC cluster, or with cloud compute). The fact SPoRC captures May and June 2020, the climax of BLM, primes it for this type of research.</p>
+
+<p>(I have linked a <a href="/transcription.pdf">PDF of my transcription</a> below for those interested.)</p>
+
+<p>Needless to say, I was pretty shocked. I still hadn't emailed Alexander, and part of me wanted to ignore the issue, sweep it under the rug. Not run another preprocessing iteration. Stop torturing my RAM.</p>
+
+<p>But I couldn't. I couldn't sweep it under the rug. The thought that an algorithm could be inadvertently erasing discussions about racial justice was the very reason I wanted in on this field. Ignoring it felt like a betrayal. The doubt and exhaustion were there, but the need to know was greater. If this was happening here, where else was it happening? How widespread was the problem? The blissful morning had turned into a clouded afternoon, my mind restless, tormented. I emailed Alexander. It was time for a reset. Time to build.</p>
+
+    </div>
+
+    <div class="blog-post-footer">
+      <a href="/blog.html">← All writing</a>
+      <span class="sep" style="color: var(--border);">·</span>
+      <a href="/transcription.pdf">Download transcription PDF</a>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
+</body>
+</html>

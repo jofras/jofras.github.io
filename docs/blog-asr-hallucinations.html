@@ -1,0 +1,116 @@
+<!--
+  ============================================================
+  HOW TO CREATE A NEW BLOG POST — see blog-making-tools-human.html
+  for full instructions. Short version:
+    1. Duplicate this file, rename it
+    2. Update <title>, h1, date, read time
+    3. Write your post in .blog-post-body
+    4. Add an <a href="..."> entry in blog.html
+    5. Add the page to vite.config.js
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+  <title>What ASR hallucinations taught me about data — Jonathan Quinn</title>
+  <script type="module" crossorigin src="/assets/main-bD9jRX-k.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BrZZrBNx.css">
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="blog-post">
+
+    <header class="blog-post-header reveal">
+      <h1>What ASR hallucinations taught me about data</h1>
+      <div class="blog-post-meta">
+        <span>March 2026</span>
+        <span class="sep">·</span>
+        <span>6 min read</span>
+      </div>
+    </header>
+
+    <div class="blog-post-body reveal reveal-delay-1">
+
+      <p>
+        About two months into my bachelor's thesis, I was scrolling through what I thought was finally clean data — 50GB of podcast transcripts I'd been wrangling since January — and I noticed something wrong. One file had a section where the same sentence repeated, over and over, for hundreds of lines. The podcast was about police brutality. The transcript was about nothing; it had just looped.
+      </p>
+
+      <p>
+        My first instinct was that this was censorship. It looked like the model had erased something politically sensitive and replaced it with noise. That would have been a genuinely alarming finding. But the truth turned out to be stranger and, in some ways, more interesting: Whisper, the speech recognition model used to generate the dataset, hallucinates when it gets confused. Feed it silence or background noise and it sometimes starts repeating itself, like a record skipping. Nobody had noticed because the error was subtle enough to survive casual inspection.
+      </p>
+
+      <h2>The thing about other people's datasets</h2>
+
+      <p>
+        I went looking on Google Scholar. Other researchers had used this same dataset — SPoRC, a large collection of podcast transcripts from 2020 — without mentioning the hallucinations. Either they hadn't noticed, or they had and decided it wasn't their problem to fix.
+      </p>
+
+      <p>
+        I understand the logic. Cleaning someone else's dataset is unglamorous work. It doesn't produce a clean publishable contribution on its own. And if your downstream results still look reasonable, it's tempting to assume the noise washed out.
+      </p>
+
+      <p>
+        But I couldn't do it. Partly stubbornness, partly genuine curiosity about what the contamination actually looked like at scale. If the transcript of an emotional conversation about police violence had been overwritten by a looping non-sequitur, what else had been lost? What was the actual shape of the problem?
+      </p>
+
+      <h2>Making the invisible visible</h2>
+
+      <p>
+        The challenge was that hallucinated loops aren't obviously wrong if you look at any single sentence. "We need to talk about this" is a perfectly normal thing to say in a podcast. It only becomes suspicious when it appears 400 times in a row.
+      </p>
+
+      <p>
+        So I needed a way to detect repetition across 169 million sentences without it taking weeks to run. The solution was hashing — converting every sentence to a fixed-length fingerprint using xxHash, indexing everything in PostgreSQL, and then querying for runs of identical hashes. On a single sentence, this is overkill. Across 169 million sentences, it's the only thing that works.
+      </p>
+
+      <p>
+        Once I could see the distribution of loop lengths, I needed to figure out where human repetition ends and machine error begins. Humans do repeat themselves — "no, no, no" or "right, right, right" are real things people say. But they rarely repeat the same full sentence five times in a row. I found a threshold — a run length of four — where the data shifted sharply. Past that point, loops became increasingly unique across the corpus, which meant they weren't common phrases; they were one-off glitches. I called it the elbow of hallucination, which is a slightly ridiculous name I'm keeping.
+      </p>
+
+      <h2>What I actually learned</h2>
+
+      <p>
+        The thesis was nominally about gender bias in podcasts. That's still what's written on the cover. But the more lasting thing I took from it was about data itself — specifically about the difference between data you collected and data someone else collected and handed to you.
+      </p>
+
+      <p>
+        When you collect your own data, you know its failure modes. You know the sensor that drifts after three hours, the survey question that gets misread, the edge case you didn't think of until it was too late. That knowledge is uncomfortable but useful. You can reason about what you can and can't trust.
+      </p>
+
+      <p>
+        When you inherit someone else's data, you inherit their failure modes without necessarily knowing what they are. The dataset looks clean because someone went to the trouble of formatting it nicely. That formatting is a kind of false confidence.
+      </p>
+
+      <blockquote>
+        I realized I couldn't analyze the society in the data until I fixed the instrument collecting it.
+      </blockquote>
+
+      <p>
+        The hallucinations weren't destroying the analysis — they were a small fraction of the total corpus. But they were concentrated in specific conversations, probably ones with background noise or unusual audio. That kind of structured missingness is much worse than random noise, because it can quietly skew your results in ways that look real.
+      </p>
+
+      <p>
+        I don't have a grand takeaway other than: look at your data, directly, before you trust it. Not a summary. Not a sample. Scroll through it. Build intuitions about what it looks like when something's wrong. Most of the time nothing will be. But when something is, you'll want to have been the kind of person who checks.
+      </p>
+
+    </div>
+
+    <div class="blog-post-footer">
+      <a href="/blog.html">← All writing</a>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
+</body>
+</html>

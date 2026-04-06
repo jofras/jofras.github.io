@@ -1,0 +1,132 @@
+<!--
+  ============================================================
+  HOW TO CREATE A NEW BLOG POST
+  ============================================================
+
+  1. Duplicate this file. Name it something like:
+       blog-your-title-here.html
+
+  2. Update the <title> tag (line ~10).
+
+  3. Fill in the post metadata in .blog-post-header:
+       - The h1 title
+       - The date (write it however you like, e.g. "March 2026")
+       - The read time (rough estimate, ~200 words/min)
+
+  4. Write your post in .blog-post-body.
+     Use <p> for paragraphs, <h2> for section breaks,
+     <blockquote> for pull quotes or callouts.
+
+  5. Add an entry in blog.html (the index):
+     Copy one of the existing .blog-entry divs,
+     update the title, description, date, and
+     change cursor: default → cursor: pointer and
+     wrap the whole entry in an <a href="..."> tag.
+
+  6. Add the new page to vite.config.js under rollupOptions.input:
+       blogPostSlug: 'blog-your-title-here.html',
+
+  That's it.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
+  <title>On making tools feel human — Jonathan Quinn</title>
+  <script type="module" crossorigin src="/assets/main-bD9jRX-k.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BrZZrBNx.css">
+</head>
+<body>
+  <site-navbar></site-navbar>
+
+  <main class="blog-post">
+
+    <header class="blog-post-header reveal">
+      <h1>On making tools feel human</h1>
+      <div class="blog-post-meta">
+        <span>March 2026</span>
+        <span class="sep">·</span>
+        <span>5 min read</span>
+      </div>
+    </header>
+
+    <div class="blog-post-body reveal reveal-delay-1">
+
+      <p>
+        There's a version of my network portal project where I stop after the core tools are done. The path tracer works. The switch visualizer works. Engineers can look up a device in seconds instead of minutes. Job done, ship it, move on.
+      </p>
+
+      <p>
+        But at some point during the internship I started asking a different question. Not "does it work?" but "does it feel good to use?" Those are surprisingly different things, and for internal tools — the kind nobody chose to install, the kind you just have to use — the gap between them matters a lot.
+      </p>
+
+      <h2>The boring wall</h2>
+
+      <p>
+        The original interface had a black background. Not because black was wrong — it's a classic choice, very "I'm a serious IT tool" — but because it was the default, and I hadn't thought about it. When I actually sat with it for a few minutes, it felt a little deadening. Like filling out a form in a fluorescent-lit government office. Functional, joyless.
+      </p>
+
+      <p>
+        So I swapped in a background illustration of Neuchâtel — the city whose network I was actually looking at. Suddenly there was a sense of place. You weren't just querying abstract infrastructure; you were looking at cables that ran through a real city, connecting real buildings. That shift felt meaningful even if it was just a JPEG.
+      </p>
+
+      <p>
+        Then I added fireflies. Little glowing yellow dots drifting slowly across the screen. My boss thought I'd lost the plot. But they stayed, and people liked them. The tool started to feel like it had been made by a person.
+      </p>
+
+      <h2>What Don Norman got right</h2>
+
+      <p>
+        I was reading <em>The Design of Everyday Things</em> around the same time. Norman's central argument is that when a person makes a mistake with a tool, that's almost always the designer's fault, not the user's. We tend to blame ourselves — "I should have known how to use it" — but the tool should have made it obvious.
+      </p>
+
+      <p>
+        I believe that. But I think there's a corollary that Norman doesn't dwell on: even when a tool is correctly designed, it can still be unpleasant. Correct and pleasant are different axes. The best tools score high on both.
+      </p>
+
+      <p>
+        For internal tools especially, pleasantness is usually treated as a luxury — something you add if there's time left, which there never is. I think that's a mistake. Engineers who like their tools are more likely to use them, more likely to extend them, and more likely to notice when something's wrong. A little care in the interface is an investment in the team.
+      </p>
+
+      <h2>The birthday thing</h2>
+
+      <p>
+        In the last few days of my contract, after everything was documented and ready to hand off, I built special views for each engineer in my office — custom interfaces that would appear on their birthdays. One was themed after Yayoi Kusama (for an engineer whose wife loves her work). One had Thai lanterns floating across the screen, to remember a dinner we'd had together in the old city. One was mine: a Canadian theme, a small stamp on the work.
+      </p>
+
+      <p>
+        Nobody asked for this. It wasn't in the spec. It took maybe a day. But it was the part I was most proud of, because it wasn't about the network at all — it was about the people who had to work with it every day.
+      </p>
+
+      <blockquote>
+        The world of tech is dehumanizing enough. We should make scanning networks enjoyable, not confusing.
+      </blockquote>
+
+      <p>
+        I still think that. I'm not sure "enjoyable" is always achievable, but it's worth trying for. The alternative — treating the people who use your software as an afterthought — compounds into a kind of ambient misery that nobody notices because everyone's already used to it.
+      </p>
+
+      <p>
+        Build the thing that works. Then make it feel like someone cared.
+      </p>
+
+    </div>
+
+    <div class="blog-post-footer">
+      <a href="/blog.html">← All writing</a>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
+</body>
+</html>

@@ -2,43 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   </script>
-
-  <title>About</title>
-  <script type="module" crossorigin src="/assets/main-DCLlry_R.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-renB4jpI.css">
+  <title>About — Jonathan Quinn</title>
+  <script type="module" crossorigin src="/assets/main-bD9jRX-k.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BrZZrBNx.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
-  <main class="container">
-    <section class="about">
-      <div>
-        <h1>About Me</h1>
+  <main class="about-page">
+    <h1 class="reveal">About Me</h1>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
         <p>
-            I'm a recent computer science graduate from ETH Zurich, currently working as a software engineering intern in Neuchâtel. 
+          I'm a recent computer science graduate from ETH Zurich, currently serving in the electronic warfare division of the Swiss Armed Forces.
         </p>
         <p>
-            During my degree, I spent a semester at Purdue, where I built a graphics pipeline and raced with the triathlon club. My thesis was on word embeddings from ASR transcripts, supervised by Alexander Hoyle and Ryan Cotterell.
+          During my degree, I spent a semester at Purdue University (in Indiana), where I built a graphics pipeline from scratch and raced with the triathlon club. My thesis was on word embeddings from ASR transcripts, supervised by Alexander Hoyle and Ryan Cotterell at Rycolab.
         </p>
         <p>
-            At work, I speed up code and build diagnostic tools for our team. I've been learning French along the way. What I've realized is that I enjoy the human side of building. Understanding what people actually need, designing solutions that feel intuitive.
+          After graduating, I worked in Neuchâtel's (city in the French part of Switzerland) cantonal IT department, speeding up legacy code 
+          and building diagnostic tools for the team (and learning French along the way). This summer, I'm excited to join Universitätsmedizin Mannheim 
+          for an internship in medical technology.
         </p>
         <p>
-            Next year, I want to start my master's in interaction design. I want to build things that make people happy. 
+          Next year, I want to start studying neuroscience in the IPN program at McGill University. Long-term I want to work on brain computer interfaces.
         </p>
       </div>
 
-      <div class="about-image">
-        <img src="/images/me.jpg" alt="Portrait" />
+      <div class="about-photo reveal reveal-delay-2">
+        <img src="/images/me.jpg" alt="Portrait of Jonathan Quinn" />
       </div>
-
-    </section>
+    </div>
   </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
 </body>
 </html>

@@ -2,32 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Projects</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   </script>
-
-  <!-- REQUIRED: global styles -->
+  <title>Projects — Jonathan Quinn</title>
   <link rel="stylesheet" href="/src/style.css" />
-
-  <!-- REQUIRED: load components + theme -->
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
-  <!-- REQUIRED: navbar component -->
   <site-navbar></site-navbar>
 
-  <main class="container">
-    <h1>Projects</h1>
+  <main class="projects-page">
+    <div class="page-header reveal">
+      <h1>Projects</h1>
+      <p>Short intros to selected work — research, tools, and side projects.</p>
+    </div>
 
-    <p class="projects-subtitle">
-      Short intros to selected work
-    </p>
-
-    <section class="projects">
+    <section class="projects-grid">
       <project-card
         title="Lost in Transcription"
         tagline="My bachelor's thesis on ASR hallucinations."
@@ -51,11 +45,15 @@
 
       <project-card
         title="3D Graphics Pipeline"
-        tagline="An interactive engine as part of my computer graphics fundamentals course."
+        tagline="An interactive engine from my graphics fundamentals course."
         image="/images/project4.jpg"
         link="/project-4.html">
       </project-card>
     </section>
   </main>
+
+  <footer>
+    &copy; 2025 Jonathan Quinn &nbsp;·&nbsp; Built with care
+  </footer>
 </body>
 </html>
