@@ -1,3 +1,10 @@
+// Self-hosted fonts (no Google Fonts network request)
+import "@fontsource/lora/400.css";
+import "@fontsource/lora/500.css";
+import "@fontsource/lora/600.css";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
+
 import "./components/navbar.js";
 import "./components/project-card.js";
 import "./theme.js";

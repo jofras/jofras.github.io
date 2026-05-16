@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
+/* Fonts imported via @fontsource in main.js (self-hosted, no network request) */
 
 /* =====================
    THEME VARIABLES
@@ -272,6 +272,22 @@ site-navbar {
   line-height: 1.7;
   max-width: 480px;
   margin: 0;
+}
+
+.hero-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2.5rem;
+}
+
+.hero-status-sep {
+  opacity: 0.35;
 }
 
 .hero-scroll {
