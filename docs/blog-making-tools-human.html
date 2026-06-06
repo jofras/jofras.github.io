@@ -1,32 +1,12 @@
 <!--
   ============================================================
-  HOW TO CREATE A NEW BLOG POST
-  ============================================================
-
-  1. Duplicate this file. Name it something like:
-       blog-your-title-here.html
-
-  2. Update the <title> tag (line ~10).
-
-  3. Fill in the post metadata in .blog-post-header:
-       - The h1 title
-       - The date (write it however you like, e.g. "March 2026")
-       - The read time (rough estimate, ~200 words/min)
-
-  4. Write your post in .blog-post-body.
-     Use <p> for paragraphs, <h2> for section breaks,
-     <blockquote> for pull quotes or callouts.
-
-  5. Add an entry in blog.html (the index):
-     Copy one of the existing .blog-entry divs,
-     update the title, description, date, and
-     change cursor: default → cursor: pointer and
-     wrap the whole entry in an <a href="..."> tag.
-
-  6. Add the new page to vite.config.js under rollupOptions.input:
-       blogPostSlug: 'blog-your-title-here.html',
-
-  That's it.
+  HOW TO CREATE A NEW BLOG POST — see blog-ghost-in-the-machine.html
+  for full instructions. Short version:
+    1. Duplicate this file, rename it
+    2. Update <title>, h1, date, read time
+    3. Write your post in .blog-post-body
+    4. Add an <a href="..."> entry in blog.html
+    5. Add the page to vite.config.js
   ============================================================
 -->
 <!DOCTYPE html>
@@ -35,21 +15,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>On making tools feel human — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <main class="blog-post">
 
-    <header class="blog-post-header reveal">
+    <header class="blog-post-header">
       <h1>On making tools feel human</h1>
       <div class="blog-post-meta">
         <span>March 2026</span>
@@ -58,7 +40,7 @@
       </div>
     </header>
 
-    <div class="blog-post-body reveal reveal-delay-1">
+    <div class="blog-post-body">
 
       <p>
         There's a version of my network portal project where I stop after the core tools are done. The path tracer works. The switch visualizer works. Engineers can look up a device in seconds instead of minutes. Job done, ship it, move on.

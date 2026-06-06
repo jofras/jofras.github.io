@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>Projects — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
@@ -17,40 +19,39 @@
   <site-navbar></site-navbar>
 
   <main class="projects-page">
-    <div class="page-header reveal">
-      <h1>Projects</h1>
-      <p>Short intros to selected work — research, tools, and side projects.</p>
-    </div>
+    <h1>Projects</h1>
+    <p class="page-intro">Research, tools, and side projects.</p>
 
-    <section class="projects-grid">
-      <project-card
-        title="Lost in Transcription"
-        tagline="My bachelor's thesis on ASR hallucinations."
-        image="/images/project1.jpg"
-        link="/lost-in-transcription.html">
-      </project-card>
-
-      <project-card
-        title="Network Portal"
-        tagline="Diagnostic tools for the Canton of Neuchâtel."
-        image="/images/project2.jpg"
-        link="/network-portal.html">
-      </project-card>
-
-      <project-card
-        title="3Steps Athletics"
-        tagline="A hockey camp website for a friend."
-        image="/images/project3.jpg"
-        link="/3steps-athletics.html">
-      </project-card>
-
-      <project-card
-        title="3D Graphics Pipeline"
-        tagline="An interactive engine from my graphics fundamentals course."
-        image="/images/project4.jpg"
-        link="/graphics-pipeline.html">
-      </project-card>
-    </section>
+    <table class="data-table">
+      <tr>
+        <td class="col-main">
+          <a href="/lost-in-transcription.html">Lost in Transcription</a>
+          <div class="table-tagline">Bachelor's thesis on ASR hallucinations in podcast transcripts.</div>
+        </td>
+        <td class="col-side">NLP · ETH Zurich</td>
+      </tr>
+      <tr>
+        <td class="col-main">
+          <a href="/network-portal.html">Network Portal</a>
+          <div class="table-tagline">Full-stack diagnostic tools for the Canton of Neuchâtel.</div>
+        </td>
+        <td class="col-side">Full-stack · Python</td>
+      </tr>
+      <tr>
+        <td class="col-main">
+          <a href="/3steps-athletics.html">3Steps Athletics</a>
+          <div class="table-tagline">A hockey camp website for a friend's business.</div>
+        </td>
+        <td class="col-side">Web · JavaScript</td>
+      </tr>
+      <tr>
+        <td class="col-main">
+          <a href="/graphics-pipeline.html">3D Graphics Pipeline</a>
+          <div class="table-tagline">Interactive 3D engine from a graphics fundamentals course.</div>
+        </td>
+        <td class="col-side">C++ · OpenGL</td>
+      </tr>
+    </table>
   </main>
 
   <footer>

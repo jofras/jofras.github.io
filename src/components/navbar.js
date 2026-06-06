@@ -1,9 +1,25 @@
-import { createIcons, Github, Mail, FileUser, Moon, Sun, Menu, X } from "lucide";
+const THEMES = ["light", "dark", "pink"];
+
+function getTheme() {
+  const stored = localStorage.getItem("theme");
+  if (stored && THEMES.includes(stored)) return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function setTheme(t) {
+  if (t === "light") {
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.removeItem("theme");
+  } else {
+    document.documentElement.setAttribute("data-theme", t);
+    localStorage.setItem("theme", t);
+  }
+}
 
 class SiteNavbar extends HTMLElement {
   connectedCallback() {
-    const isDark = document.documentElement.dataset.theme === "dark";
     const path = window.location.pathname;
+    const theme = getTheme();
 
     const isActive = (href) => {
       if (href === "/") return path === "/" || path === "/index.html";
@@ -15,88 +31,56 @@ class SiteNavbar extends HTMLElement {
 
     this.innerHTML = `
       <nav class="navbar">
-        <a class="nav-logo" href="/">Jonathan Quinn</a>
+        <a class="nav-logo" href="/">JQ</a>
 
         <div class="nav-links">
-          ${link("/projects.html", "Projects")}
-          ${link("/timeline.html", "Timeline")}
-          ${link("/blog.html", "Writing")}
-          ${link("/about.html", "About")}
+          ${link("/projects.html", "projects")}
+          ${link("/timeline.html", "timeline")}
+          ${link("/blog.html", "writing")}
+          ${link("/about.html", "about")}
         </div>
 
-        <div class="nav-icons">
-          <a class="icon-btn" href="https://github.com/jofras" target="_blank" rel="noopener" aria-label="GitHub">
-            <i data-lucide="github"></i>
-          </a>
-          <a class="icon-btn" href="mailto:jonfquinn@proton.me" aria-label="Email">
-            <i data-lucide="mail"></i>
-          </a>
-          <a class="icon-btn" href="/cv_jq_current.pdf" aria-label="Download CV">
-            <i data-lucide="file-user"></i>
-          </a>
-          <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
-            <i data-lucide="${isDark ? "sun" : "moon"}"></i>
-          </button>
+        <div class="nav-right">
+          <a href="https://github.com/jofras" target="_blank" rel="noopener">gh</a>
+          <a href="mailto:jonfquinn@proton.me">mail</a>
+          <a href="/cv_jq_current.pdf">cv</a>
+          <button class="theme-toggle" id="theme-toggle">[${theme}]</button>
         </div>
 
-        <!-- Mobile: theme + hamburger always visible -->
         <div class="nav-mobile-controls">
-          <button class="icon-btn" id="theme-toggle-mobile" aria-label="Toggle theme">
-            <i data-lucide="${isDark ? "sun" : "moon"}"></i>
-          </button>
-          <button class="icon-btn nav-hamburger" id="menu-toggle" aria-label="Toggle menu">
-            <i data-lucide="menu"></i>
-          </button>
+          <button class="theme-toggle" id="theme-toggle-mobile">[${theme}]</button>
+          <button class="nav-hamburger" id="menu-toggle">☰</button>
         </div>
       </nav>
 
       <div class="nav-mobile-menu" id="mobile-menu" aria-hidden="true">
         <div class="mobile-menu-links">
-          ${link("/projects.html", "Projects")}
-          ${link("/timeline.html", "Timeline")}
-          ${link("/blog.html", "Writing")}
-          ${link("/about.html", "About")}
+          ${link("/projects.html", "projects")}
+          ${link("/timeline.html", "timeline")}
+          ${link("/blog.html", "writing")}
+          ${link("/about.html", "about")}
         </div>
-        <div class="mobile-menu-icons">
-          <a class="icon-btn" href="https://github.com/jofras" target="_blank" rel="noopener" aria-label="GitHub">
-            <i data-lucide="github"></i>
-          </a>
-          <a class="icon-btn" href="mailto:jonfquinn@proton.me" aria-label="Email">
-            <i data-lucide="mail"></i>
-          </a>
-          <a class="icon-btn" href="/cv_jq_current.pdf" aria-label="Download CV">
-            <i data-lucide="file-user"></i>
-          </a>
+        <div class="mobile-menu-extras">
+          <a href="https://github.com/jofras" target="_blank" rel="noopener">gh</a>
+          <a href="mailto:jonfquinn@proton.me">mail</a>
+          <a href="/cv_jq_current.pdf">cv</a>
         </div>
       </div>
     `;
 
-    this.renderIcons();
     this.setupThemeToggle();
     this.setupMobileMenu();
   }
 
-  renderIcons() {
-    createIcons({ icons: { Github, Mail, FileUser, Moon, Sun, Menu, X } });
-  }
-
   setupThemeToggle() {
-    const toggle = (id) => {
-      this.querySelector(id)?.addEventListener("click", () => {
-        const root = document.documentElement;
-        const isDark = root.dataset.theme === "dark";
-        if (isDark) {
-          delete root.dataset.theme;
-          localStorage.removeItem("theme");
-        } else {
-          root.dataset.theme = "dark";
-          localStorage.setItem("theme", "dark");
-        }
-        this.connectedCallback();
-      });
+    const cycle = () => {
+      const cur = getTheme();
+      const next = THEMES[(THEMES.indexOf(cur) + 1) % THEMES.length];
+      setTheme(next);
+      this.connectedCallback();
     };
-    toggle("#theme-toggle");
-    toggle("#theme-toggle-mobile");
+    this.querySelector("#theme-toggle")?.addEventListener("click", cycle);
+    this.querySelector("#theme-toggle-mobile")?.addEventListener("click", cycle);
   }
 
   setupMobileMenu() {
@@ -107,18 +91,14 @@ class SiteNavbar extends HTMLElement {
     btn.addEventListener("click", () => {
       const isOpen = menu.classList.toggle("open");
       menu.setAttribute("aria-hidden", String(!isOpen));
-      // Swap hamburger ↔ X icon
-      btn.innerHTML = `<i data-lucide="${isOpen ? "x" : "menu"}"></i>`;
-      createIcons({ icons: { Menu, X } });
+      btn.textContent = isOpen ? "✕" : "☰";
     });
 
-    // Close menu on nav link click
     menu.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", () => {
         menu.classList.remove("open");
         menu.setAttribute("aria-hidden", "true");
-        btn.innerHTML = `<i data-lucide="menu"></i>`;
-        createIcons({ icons: { Menu } });
+        btn.textContent = "☰";
       });
     });
   }

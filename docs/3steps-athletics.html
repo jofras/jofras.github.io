@@ -4,44 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>3Steps Athletics — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <main class="project-article">
 
-    <div class="project-header reveal">
+    <div class="project-header">
       <h1>3Steps Athletics</h1>
       <p class="subtitle">
         A friendly, intuitive website for a friend's hockey camp business.
       </p>
     </div>
 
-    <!-- Intro spread: text left, hero image right -->
-    <div class="spread spread-right reveal">
-      <div class="spread-text">
-        <p>
-          This is an ongoing project I'm building with a friend who runs hockey camps in Switzerland. The site just launched and the first signups are rolling in. We're excited for the summer camp season.
-        </p>
-        <p>
-          The challenge was straightforward: create a website that makes it easy for parents to learn about the camp, see what it's like, and sign their kids up. No friction, no confusion, just a clear path from curiosity to registration.
-        </p>
-        <p>
-          My friend had been running these camps for a few years, relying on word of mouth and social media posts. It worked, but it wasn't scalable. Parents would DM questions, registration happened through spreadsheets, and there was no central place to see what the camp was actually about.
-        </p>
-        <p>
-          I wanted to build something that felt personal and approachable, not like a corporate sports website. The camp has a real philosophy behind it, and I wanted that to come through in the design. It needed to feel like the camp itself: welcoming, energetic, human.
-        </p>
-      </div>
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        This is an ongoing project I'm building with a friend who runs hockey camps in Switzerland. The site just launched and the first signups are rolling in. We're excited for the summer camp season.
+      </p>
+      <p>
+        The challenge was straightforward: create a website that makes it easy for parents to learn about the camp, see what it's like, and sign their kids up. No friction, no confusion, just a clear path from curiosity to registration.
+      </p>
+      <p>
+        My friend had been running these camps for a few years, relying on word of mouth and social media posts. It worked, but it wasn't scalable. Parents would DM questions, registration happened through spreadsheets, and there was no central place to see what the camp was actually about.
+      </p>
+      <p>
+        I wanted to build something that felt personal and approachable, not like a corporate sports website. The camp has a real philosophy behind it, and I wanted that to come through in the design. It needed to feel like the camp itself: welcoming, energetic, human.
+      </p>
+      <div class="project-img">
         <img src="/images/everybody-smile.jpg" alt="Camp group photo" />
       </div>
     </div>
@@ -50,86 +49,71 @@
 
     <h3>Easy Signup</h3>
 
-    <!-- Signup spread: image left, text right -->
-    <div class="spread spread-left reveal">
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        We wanted to make it as easy as possible for parents to find information and register. The signup goes through a Google Form, which is basic but gets the job done. More importantly, everything is centralized now instead of scattered across Instagram DMs and text messages.
+      </p>
+      <div class="project-img">
         <img src="/images/landing.jpg" alt="Landing page" />
-      </div>
-      <div class="spread-text">
-        <p>
-          We wanted to make it as easy as possible for parents to find information and register. The signup goes through a Google Form, which is basic but gets the job done. More importantly, everything is centralized now instead of scattered across Instagram DMs and text messages.
-        </p>
       </div>
     </div>
 
     <h3>Storytelling</h3>
 
-    <!-- Storytelling spread: text left, image right -->
-    <div class="spread spread-right reveal">
-      <div class="spread-text">
-        <p>
-          The website is built very much on telling the story of how the camp has evolved, from its start in 2022 to today. We wanted parents to understand not just what happens at the camp, but why it exists.
-        </p>
-        <p>
-          It includes a multimedia page with videos from past camps, a photo archive showing the progression over the years, and the camp's philosophy woven throughout. The goal was to make it feel less like a transaction and more like joining a community.
-        </p>
-      </div>
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        The website is built very much on telling the story of how the camp has evolved, from its start in 2022 to today. We wanted parents to understand not just what happens at the camp, but why it exists.
+      </p>
+      <p>
+        It includes a multimedia page with videos from past camps, a photo archive showing the progression over the years, and the camp's philosophy woven throughout. The goal was to make it feel less like a transaction and more like joining a community.
+      </p>
+      <div class="project-img">
         <img src="/images/storytelling.jpg" alt="Multimedia storytelling page" />
       </div>
     </div>
 
     <h3>Team Introduction</h3>
 
-    <!-- Team spread: image left, text right -->
-    <div class="spread spread-left reveal">
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        The "Who We Are" section introduces the coaches with photos and short bios. These aren't professional headshots — they're action shots from the ice.
+      </p>
+      <p>
+        We wanted parents to see the people who'll actually be working with their kids, not just a polished brand. Each team member gets a quote to introduce themselves and their training philosophy. This renders them friendlier and more approachable.
+      </p>
+      <div class="project-img">
         <img src="/images/whoweare.jpg" alt="Team introduction page" />
-      </div>
-      <div class="spread-text">
-        <p>
-          The "Who We Are" section introduces the coaches with photos and short bios. These aren't professional headshots — they're action shots from the ice.
-        </p>
-        <p>
-          We wanted parents to see the people who'll actually be working with their kids, not just a polished brand. Each team member gets a quote to introduce themselves and their training philosophy. This renders them friendlier and more approachable.
-        </p>
       </div>
     </div>
 
     <h3>Social Media &amp; Language</h3>
 
-    <!-- Social + language spread: text left, image right -->
-    <div class="spread spread-right reveal">
-      <div class="spread-text">
-        <p>
-          A big part of the camp's identity lives on Instagram, where my friend posts clips from training sessions and camp highlights. Rather than duplicate that content, we embedded the feed directly and made it easy to follow. It keeps the site feeling active even when we're not updating the main pages.
-        </p>
-        <p>
-          The site is bilingual (English and German) because the camp serves families from across Switzerland. The language toggle is in the nav, and switching doesn't reload the page. It's a small thing, but it signals that both language communities are equally welcome.
-        </p>
-      </div>
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        A big part of the camp's identity lives on Instagram, where my friend posts clips from training sessions and camp highlights. Rather than duplicate that content, we embedded the feed directly and made it easy to follow. It keeps the site feeling active even when we're not updating the main pages.
+      </p>
+      <p>
+        The site is bilingual (English and German) because the camp serves families from across Switzerland. The language toggle is in the nav, and switching doesn't reload the page. It's a small thing, but it signals that both language communities are equally welcome.
+      </p>
+      <div class="project-img">
         <img src="/images/website-follow-us.jpg" alt="Social media links" />
       </div>
     </div>
 
     <h2>Results</h2>
 
-    <!-- Results spread: image left, text right -->
-    <div class="spread spread-left reveal">
-      <div class="spread-image">
+    <div class="project-section">
+      <p>
+        The site launched a few weeks ago and we've already had signups come through the website instead of Instagram DMs. Big win! Parents have told us it's clear and easy to navigate, which is exactly what we were going for.
+      </p>
+      <p>
+        There's still a lot to improve. It would be good to integrate a database backend and more automation. We also want to add testimonials from past campers and maybe a blog for training tips. But it's live, it's working, and it's already making things easier.
+      </p>
+      <p>
+        For me, this project was about designing for a real business and community. It was cool to take a break from academia and try something totally new. As I have a lot of other stuff going on, I will be passing the baton to another friend soon. But I'm happy I had a positive impact.
+      </p>
+      <div class="project-img">
         <img src="/images/family.jpg" alt="Families at the camp" />
-      </div>
-      <div class="spread-text">
-        <p>
-          The site launched a few weeks ago and we've already had signups come through the website instead of Instagram DMs. Big win! Parents have told us it's clear and easy to navigate, which is exactly what we were going for.
-        </p>
-        <p>
-          There's still a lot to improve. It would be good to integrate a database backend and more automation. We also want to add testimonials from past campers and maybe a blog for training tips. But it's live, it's working, and it's already making things easier.
-        </p>
-        <p>
-          For me, this project was about designing for a real business and community. It was cool to take a break from academia and try something totally new. As I have a lot of other stuff going on, I will be passing the baton to another friend soon. But I'm happy I had a positive impact.
-        </p>
       </div>
     </div>
 

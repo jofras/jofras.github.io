@@ -4,140 +4,128 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <!-- HERO -->
   <section class="landing-hero">
-    <div class="hero-eyebrow reveal">Jonathan Quinn</div>
-    <h1 class="hero-title reveal reveal-delay-1">
+    <div class="hero-eyebrow">Jonathan Quinn</div>
+    <h1 class="hero-title">
       hey you!<span class="hero-cursor">_</span>
     </h1>
-    <p class="hero-tagline reveal reveal-delay-2">
-      Welcome to my personal website.
-    </p>
-    <div class="hero-status reveal reveal-delay-3">
+    <div class="hero-status">
       <span>Mannheim, Germany</span>
-      <span class="hero-status-sep">·</span>
       <span>Medtech intern</span>
-    </div>
-    <div class="hero-scroll" aria-hidden="true">
-      <span>scroll</span>
-      <svg viewBox="0 0 12 12">
-        <polyline points="2,4 6,8 10,4" />
-      </svg>
     </div>
   </section>
 
   <!-- 01 — PROJECTS -->
   <section class="landing-section">
-    <div class="section-bg-number" aria-hidden="true">01</div>
-    <div class="section-label reveal">Projects</div>
-    <div class="section-header reveal reveal-delay-1">
-      <h2 class="section-title">Selected Work</h2>
-      <a href="/projects.html" class="cta-link">View all <span class="arrow">→</span></a>
+    <div class="section-label">01 / projects</div>
+    <div class="section-header">
+      <span class="section-title">Selected Work</span>
+      <a href="/projects.html" class="cta-link">view all →</a>
     </div>
-    <p class="section-teaser reveal reveal-delay-2">
-      Research and side projects, from data pipelines to voice journaling.
-    </p>
-    <div class="landing-cards reveal reveal-delay-3">
-      <project-card
-        title="Lost in Transcription"
-        tagline="My bachelor's thesis on ASR hallucinations."
-        image="/images/project1.jpg"
-        link="/lost-in-transcription.html">
-      </project-card>
-      <project-card
-        title="Network Portal"
-        tagline="Diagnostic tools for the Canton of Neuchâtel."
-        image="/images/project2.jpg"
-        link="/network-portal.html">
-      </project-card>
-    </div>
+    <table class="data-table">
+      <tr>
+        <td class="col-main">
+          <a href="/lost-in-transcription.html">Lost in Transcription</a>
+          <div class="table-tagline">Bachelor's thesis on ASR hallucinations.</div>
+        </td>
+        <td class="col-side">NLP · ETH Zurich</td>
+      </tr>
+      <tr>
+        <td class="col-main">
+          <a href="/network-portal.html">Network Portal</a>
+          <div class="table-tagline">Diagnostic tools for the Canton of Neuchâtel.</div>
+        </td>
+        <td class="col-side">Full-stack · Python</td>
+      </tr>
+    </table>
   </section>
 
   <!-- 02 — TIMELINE -->
   <section class="landing-section">
-    <div class="section-bg-number" aria-hidden="true">02</div>
-    <div class="section-label reveal">Timeline</div>
-    <div class="section-header reveal reveal-delay-1">
-      <h2 class="section-title">The Journey</h2>
-      <a href="/timeline.html" class="cta-link">Full timeline <span class="arrow">→</span></a>
+    <div class="section-label">02 / timeline</div>
+    <div class="section-header">
+      <span class="section-title">The Journey</span>
+      <a href="/timeline.html" class="cta-link">full timeline →</a>
     </div>
-    <p class="section-teaser reveal reveal-delay-2">
-      From biology to computers to the hospital.
-    </p>
-    <div class="timeline-snippet reveal reveal-delay-3">
-      <div class="ts-item">
-        <div class="ts-year">Late 2025</div>
-        <div class="ts-title">Software Engineering Intern</div>
-        <div class="ts-desc">Network tooling for the Canton of Neuchâtel</div>
+    <div class="tl-snippet">
+      <div class="tl-snippet-row">
+        <div class="tl-snippet-year">Mid 2026</div>
+        <div class="tl-snippet-content">
+          <div class="tl-snippet-title">Medtech Intern</div>
+          <div class="tl-snippet-desc">Universitätsmedizin Mannheim</div>
+        </div>
       </div>
-      <div class="ts-item">
-        <div class="ts-year"> Mid 2025</div>
-        <div class="ts-title">Bachelor's Thesis, ETH Zurich</div>
-        <div class="ts-desc">ASR hallucinations &amp; word embeddings, Rycolab</div>
+      <div class="tl-snippet-row">
+        <div class="tl-snippet-year">Mid 2025</div>
+        <div class="tl-snippet-content">
+          <div class="tl-snippet-title">Bachelor's Thesis</div>
+          <div class="tl-snippet-desc">ASR hallucinations &amp; word embeddings, Rycolab</div>
+        </div>
       </div>
-      <div class="ts-item">
-        <div class="ts-year">Late 2024</div>
-        <div class="ts-title">Exchange Semester, Purdue University</div>
-        <div class="ts-desc">3D graphics, triathlon club, roadtripping</div>
+      <div class="tl-snippet-row">
+        <div class="tl-snippet-year">Late 2024</div>
+        <div class="tl-snippet-content">
+          <div class="tl-snippet-title">Exchange Semester</div>
+          <div class="tl-snippet-desc">Purdue University — 3D graphics, triathlon, roadtrips</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 03 — WRITING -->
   <section class="landing-section">
-    <div class="section-bg-number" aria-hidden="true">03</div>
-    <div class="section-label reveal">Writing</div>
-    <div class="section-header reveal reveal-delay-1">
-      <h2 class="section-title">Notes &amp; Thoughts</h2>
-      <a href="/blog.html" class="cta-link">Read more <span class="arrow">→</span></a>
+    <div class="section-label">03 / writing</div>
+    <div class="section-header">
+      <span class="section-title">Notes &amp; Thoughts</span>
+      <a href="/blog.html" class="cta-link">read more →</a>
     </div>
-    <p class="section-teaser reveal reveal-delay-2">
-      Occasional writing on design, technology, and whatever else seems worth putting into words.
-    </p>
-    <div class="post-stubs reveal reveal-delay-3">
-      <div class="post-stub">
-        <div class="post-stub-inner">
-          <div class="post-stub-title">Ghost in the Machine</div>
-          <div class="post-stub-desc">A thesis detour that ended up being the whole point.</div>
+    <div class="blog-list">
+      <a class="blog-entry" href="/blog-ghost-in-the-machine.html">
+        <div class="blog-entry-inner">
+          <div class="blog-entry-title">Ghost in the Machine</div>
+          <div class="blog-entry-desc">A thesis detour that ended up being the whole point.</div>
         </div>
-        <div class="post-stub-date">Mar 2026</div>
-      </div>
-      <div class="post-stub">
-        <div class="post-stub-inner">
-          <div class="post-stub-title">On making tools feel human</div>
-          <div class="post-stub-desc">People use things that are fun to use.</div>
+        <div class="blog-entry-date">Mar 2026</div>
+      </a>
+      <a class="blog-entry" href="/blog-making-tools-human.html">
+        <div class="blog-entry-inner">
+          <div class="blog-entry-title">On making tools feel human</div>
+          <div class="blog-entry-desc">People use things that are fun to use.</div>
         </div>
-        <div class="post-stub-date">Mar 2026</div>
-      </div>
+        <div class="blog-entry-date">Mar 2026</div>
+      </a>
     </div>
   </section>
 
   <!-- 04 — ABOUT -->
   <section class="landing-section">
-    <div class="section-bg-number" aria-hidden="true">04</div>
-    <div class="section-label reveal">About</div>
-    <h2 class="section-title reveal reveal-delay-1">Who I Am</h2>
-    <div class="about-mini reveal reveal-delay-2">
-      <div>
+    <div class="section-label">04 / about</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-snippet">
+      <div class="about-snippet-text">
         <p>
-          CS graduate from ETH Zurich. I like building things by interacting with the people I'm building for, optimizing across the stack, and diving deep into research questions.
+          CS graduate from ETH Zurich. I like building things by interacting with the people
+          I'm building for, optimizing across the stack, and diving deep into research questions.
           Currently learning French and planning a master's in neuroscience.
         </p>
-        <a href="/about.html" class="cta-link">Learn more <span class="arrow">→</span></a>
+        <a href="/about.html" class="cta-link">learn more →</a>
       </div>
-      <div class="about-mini-photo">
+      <div class="about-snippet-photo">
         <img src="/images/me.jpg" alt="Jonathan Quinn" />
       </div>
     </div>

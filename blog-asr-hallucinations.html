@@ -1,6 +1,6 @@
 <!--
   ============================================================
-  HOW TO CREATE A NEW BLOG POST — see blog-making-tools-human.html
+  HOW TO CREATE A NEW BLOG POST — see blog-ghost-in-the-machine.html
   for full instructions. Short version:
     1. Duplicate this file, rename it
     2. Update <title>, h1, date, read time
@@ -15,9 +15,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>What ASR hallucinations taught me about data — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
@@ -29,7 +31,7 @@
 
   <main class="blog-post">
 
-    <header class="blog-post-header reveal">
+    <header class="blog-post-header">
       <h1>What ASR hallucinations taught me about data</h1>
       <div class="blog-post-meta">
         <span>March 2026</span>
@@ -38,7 +40,7 @@
       </div>
     </header>
 
-    <div class="blog-post-body reveal reveal-delay-1">
+    <div class="blog-post-body">
 
       <p>
         About two months into my bachelor's thesis, I was scrolling through what I thought was finally clean data — 50GB of podcast transcripts I'd been wrangling since January — and I noticed something wrong. One file had a section where the same sentence repeated, over and over, for hundreds of lines. The podcast was about police brutality. The transcript was about nothing; it had just looped.

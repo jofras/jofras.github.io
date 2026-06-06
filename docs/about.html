@@ -4,23 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>About — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <main class="about-page">
-    <h1 class="reveal">About Me</h1>
+    <h1>About Me</h1>
 
     <div class="about-grid">
-      <div class="about-text reveal">
+      <div class="about-text">
         <p>
           I'm a recent computer science graduate from ETH Zurich, currently serving in the electronic warfare division of the Swiss Armed Forces.
         </p>
@@ -28,16 +30,16 @@
           During my degree, I spent a semester at Purdue University (in Indiana), where I built a graphics pipeline from scratch and raced with the triathlon club. My thesis was on word embeddings from ASR transcripts, supervised by Alexander Hoyle and Ryan Cotterell at Rycolab.
         </p>
         <p>
-          After graduating, I worked in Neuchâtel's (city in the French part of Switzerland) cantonal IT department, speeding up legacy code 
-          and building diagnostic tools for the team (and learning French along the way). This summer, I'm excited to join Universitätsmedizin Mannheim 
+          After graduating, I worked in Neuchâtel's (city in the French part of Switzerland) cantonal IT department, speeding up legacy code
+          and building diagnostic tools for the team (and learning French along the way). This summer, I'm excited to join Universitätsmedizin Mannheim
           for an internship in medical technology.
         </p>
         <p>
-          Long-term, I want to work in robotics. Evolution has had millions of years to optimize movement, sensing, et cetera, and I'd love to build systems that take cues from it. 
+          Long-term, I want to work in robotics. Evolution has had millions of years to optimize movement, sensing, et cetera, and I'd love to build systems that take cues from it.
         </p>
       </div>
 
-      <div class="about-photo reveal reveal-delay-2">
+      <div class="about-photo">
         <img src="/images/me.jpg" alt="Portrait of Jonathan Quinn" />
       </div>
     </div>

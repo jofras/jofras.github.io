@@ -19,9 +19,7 @@
 
   5. Add an entry in blog.html (the index):
      Copy one of the existing .blog-entry divs,
-     update the title, description, date, and
-     change cursor: default → cursor: pointer and
-     wrap the whole entry in an <a href="..."> tag.
+     update the title, description, date, and href.
 
   6. Add the new page to vite.config.js under rollupOptions.input:
        blogPostSlug: 'blog-your-title-here.html',
@@ -35,9 +33,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>Ghost in the Machine — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
@@ -49,7 +49,7 @@
 
   <main class="blog-post">
 
-    <header class="blog-post-header reveal">
+    <header class="blog-post-header">
       <h1>Ghost in the Machine</h1>
       <div class="blog-post-meta">
         <span>March 2026</span>
@@ -58,7 +58,7 @@
       </div>
     </header>
 
-    <div class="blog-post-body reveal reveal-delay-1">
+    <div class="blog-post-body">
 
       <p>For my bachelor's thesis, I wanted to do something in NLP. A few years back, I'd read Brian Christian's Alignment Problem, and I couldn't stop thinking about it. First, the moment Tolga Bolukbasi and Adam Kalai discovered Word2Vec was gender-biased; and second, ProPublica's blockbuster dissection of COMPAS's racist bail policy. I needed to get into that space where computers meet ethics.</p>
 
@@ -106,7 +106,7 @@
 
     <div class="blog-post-footer">
       <a href="/blog.html">← All writing</a>
-      <span class="sep" style="color: var(--border);">·</span>
+      <span class="sep">·</span>
       <a href="/transcription.pdf">Download transcription PDF</a>
     </div>
 

@@ -4,21 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>Writing — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <main class="blog-page">
-    <h1 class="reveal">Writing</h1>
-    <p class="page-intro reveal reveal-delay-1">
+    <h1>Writing</h1>
+    <p class="page-intro">
       Occasional notes on design, technology, and whatever else seems worth putting into words.
     </p>
 
@@ -26,7 +28,7 @@
       TO ADD A NEW POST: copy one of the <a class="blog-entry"> blocks below,
       update the href, title, description, and date. Done.
     -->
-    <div class="blog-list reveal reveal-delay-2">
+    <div class="blog-list">
 
       <a class="blog-entry" href="/blog-ghost-in-the-machine.html">
         <div class="blog-entry-inner">
@@ -47,6 +49,7 @@
         </div>
         <div class="blog-entry-date">Mar 2026</div>
       </a>
+
     </div>
   </main>
 

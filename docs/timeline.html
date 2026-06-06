@@ -4,204 +4,224 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (t !== "light") document.documentElement.setAttribute("data-theme", t);
+    })();
   </script>
   <title>Timeline — Jonathan Quinn</title>
   <link rel="icon" href="/favicon.svg" />
-  <script type="module" crossorigin src="/assets/main-DV2PKufr.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BwKXNYn6.css">
+  <script type="module" crossorigin src="/assets/main-C7j915xM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CvBEuiKU.css">
 </head>
 <body>
   <site-navbar></site-navbar>
 
   <main class="timeline-page">
-    <h1 class="reveal">Timeline</h1>
-    <p class="page-intro reveal reveal-delay-1">
+    <h1>Timeline</h1>
+    <p class="page-intro">
       What I've been up to since finishing high school.
     </p>
 
     <div class="timeline">
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Mid 2026</div>
-        <div class="tl-role">Medtech Intern</div>
-        <div class="tl-org">Universitätsmedizin Mannheim, Germany</div>
-        <div class="tl-body">
-          <p>
-            Very excited to work on new medical tech at Mannheim's university clinic this summer.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Medical Research</span>
+        <div class="tl-content">
+          <div class="tl-role">Medtech Intern</div>
+          <div class="tl-org">Universitätsmedizin Mannheim, Germany</div>
+          <div class="tl-body">
+            <p>
+              Very excited to work on new medical tech at Mannheim's university clinic this summer.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Medical Research</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Early 2026</div>
-        <div class="tl-role">Soldier</div>
-        <div class="tl-org">Swiss Armed Forces</div>
-        <div class="tl-body">
-          <p>
-            Doing mandatory service in the electronic warfare division. Got a mid-sized truck and bus driver's license.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Signal Processing</span>
-          <span class="tl-tag">Driving Trucks</span>
-          <span class="tl-tag">Sleep Deprivation</span>
+        <div class="tl-content">
+          <div class="tl-role">Soldier</div>
+          <div class="tl-org">Swiss Armed Forces</div>
+          <div class="tl-body">
+            <p>
+              Doing mandatory service in the electronic warfare division. Got a mid-sized truck and bus driver's license.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Signal Processing</span>
+            <span class="tl-tag">Driving Trucks</span>
+            <span class="tl-tag">Sleep Deprivation</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Late 2025</div>
-        <div class="tl-role">Software Engineering Intern</div>
-        <div class="tl-org">Canton of Neuchâtel, Switzerland</div>
-        <div class="tl-body">
-          <p>
-            Built diagnostic and monitoring tools for the canton's network operations team.
-            Designed and shipped a full-stack network portal (including a path tracer, switch
-            visualizer, and authentication) from scratch over two months. Occasionally helped
-            hook up hardware in the datacenter.
-          </p>
-          <p>
-            Revamped my French on the side. Also discovered how much large hardware vendors' subscription (and deprecation) models 
-            hurt SMBs, and how far a little UX can go in upping morale.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Python</span>
-          <span class="tl-tag">JavaScript</span>
-          <span class="tl-tag">MySQL</span>
-          <span class="tl-tag">SNMP</span>
-          <span class="tl-tag">Linux</span>
-          <span class="tl-tag">OIDs</span>
+        <div class="tl-content">
+          <div class="tl-role">Software Engineering Intern</div>
+          <div class="tl-org">Canton of Neuchâtel, Switzerland</div>
+          <div class="tl-body">
+            <p>
+              Built diagnostic and monitoring tools for the canton's network operations team.
+              Designed and shipped a full-stack network portal (including a path tracer, switch
+              visualizer, and authentication) from scratch over two months. Occasionally helped
+              hook up hardware in the datacenter.
+            </p>
+            <p>
+              Revamped my French on the side. Also discovered how much large hardware vendors' subscription (and deprecation) models
+              hurt SMBs, and how far a little UX can go in upping morale.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Python</span>
+            <span class="tl-tag">JavaScript</span>
+            <span class="tl-tag">MySQL</span>
+            <span class="tl-tag">SNMP</span>
+            <span class="tl-tag">Linux</span>
+            <span class="tl-tag">OIDs</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">August 2025</div>
-        <div class="tl-role">Ironman Finisher</div>
-        <div class="tl-org">Thun, Switzerland</div>
-        <div class="tl-body">
-          <p>
-            Finished my four-year triathlon journey with the Ironman in Thun. Didn't feel my fittest 
-            (especially due to thesis pressure) but loved the swim at sunrise next to the mountains.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Open Water Swimming</span>
-          <span class="tl-tag">Spinning Class</span>
-          <span class="tl-tag">Running</span>
-          <span class="tl-tag">Discipline</span>
+        <div class="tl-content">
+          <div class="tl-role">Ironman Finisher</div>
+          <div class="tl-org">Thun, Switzerland</div>
+          <div class="tl-body">
+            <p>
+              Finished my four-year triathlon journey with the Ironman in Thun. Didn't feel my fittest
+              (especially due to thesis pressure) but loved the swim at sunrise next to the mountains.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Open Water Swimming</span>
+            <span class="tl-tag">Spinning Class</span>
+            <span class="tl-tag">Running</span>
+            <span class="tl-tag">Discipline</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Mid 2025</div>
-        <div class="tl-role">Bachelor's Thesis</div>
-        <div class="tl-org">Rycolab, ETH Zurich</div>
-        <div class="tl-body">
-          <p>
-            Moved from debiasing embeddings to investigating Whisper ASR hallucinations in 
-            podcast transcripts. Built a custom parallel preprocessing pipeline that processed
-            169M+ sentences on ETH's HPC cluster.
-          </p>
-          <p>
-            Supervised by the wonderful Alexander Hoyle and Ryan Cotterell. 
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">NLP</span>
-          <span class="tl-tag">Python</span>
-          <span class="tl-tag">GloVe</span>
-          <span class="tl-tag">PostgreSQL</span>
-          <span class="tl-tag">HPC</span>
+        <div class="tl-content">
+          <div class="tl-role">Bachelor's Thesis</div>
+          <div class="tl-org">Rycolab, ETH Zurich</div>
+          <div class="tl-body">
+            <p>
+              Moved from debiasing embeddings to investigating Whisper ASR hallucinations in
+              podcast transcripts. Built a custom parallel preprocessing pipeline that processed
+              169M+ sentences on ETH's HPC cluster.
+            </p>
+            <p>
+              Supervised by the wonderful Alexander Hoyle and Ryan Cotterell.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">NLP</span>
+            <span class="tl-tag">Python</span>
+            <span class="tl-tag">GloVe</span>
+            <span class="tl-tag">PostgreSQL</span>
+            <span class="tl-tag">HPC</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Early 2025</div>
-        <div class="tl-role">BSc Computer Science (final semester)</div>
-        <div class="tl-org">ETH Zurich</div>
-        <div class="tl-body">
-          <p>
-            Returned from Purdue exchange to finish the degree. Took courses in information security 
-            and *rigorous* software engineering, next to my thesis.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">ETH Zurich</span>
-          <span class="tl-tag">Software Engineering</span>
-          <span class="tl-tag">Security</span>
-          <span class="tl-tag">Datacenters</span>
+        <div class="tl-content">
+          <div class="tl-role">BSc Computer Science (final semester)</div>
+          <div class="tl-org">ETH Zurich</div>
+          <div class="tl-body">
+            <p>
+              Returned from Purdue exchange to finish the degree. Took courses in information security
+              and *rigorous* software engineering, next to my thesis.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">ETH Zurich</span>
+            <span class="tl-tag">Software Engineering</span>
+            <span class="tl-tag">Security</span>
+            <span class="tl-tag">Datacenters</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">Late 2024</div>
-        <div class="tl-role">Exchange Semester</div>
-        <div class="tl-org">Purdue University, Indiana</div>
-        <div class="tl-body">
-          <p>
-            Took a hands-on graphics fundamentals course to build a full 3D pipeline in C++ from scratch. 
-            Raced across the Midwest with the triathlon club, winning in Michigan State, 
-            and roadtripped with exchange friends.
-          </p>
-          <p>
-            Time of my life (so far).
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">C++</span>
-          <span class="tl-tag">OpenGL</span>
-          <span class="tl-tag">Computer Graphics</span>
-          <span class="tl-tag">Triathlon</span>
+        <div class="tl-content">
+          <div class="tl-role">Exchange Semester</div>
+          <div class="tl-org">Purdue University, Indiana</div>
+          <div class="tl-body">
+            <p>
+              Took a hands-on graphics fundamentals course to build a full 3D pipeline in C++ from scratch.
+              Raced across the Midwest with the triathlon club, winning in Michigan State,
+              and roadtripped with exchange friends.
+            </p>
+            <p>
+              Time of my life (so far).
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">C++</span>
+            <span class="tl-tag">OpenGL</span>
+            <span class="tl-tag">Computer Graphics</span>
+            <span class="tl-tag">Triathlon</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
+      <div class="tl-item">
         <div class="tl-period">2022 — 2024</div>
-        <div class="tl-role">BSc Computer Science</div>
-        <div class="tl-org">ETH Zurich</div>
-        <div class="tl-body">
-          <p>
-            Undergrad at one of the world's top technical universities. Did a lot of math, 
-            algorithms, machine learning, and systems programming.
-          </p>
-          <p>
-            Many spinning classes and early morning swims. Came in 19th of over 1000 on my part of 
-            the yearly relay race. Developed an appreciation for formal proofs. 
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">ETH Zurich</span>
-          <span class="tl-tag">CS</span>
-          <span class="tl-tag">ML</span>
-          <span class="tl-tag">Systems</span>
+        <div class="tl-content">
+          <div class="tl-role">BSc Computer Science</div>
+          <div class="tl-org">ETH Zurich</div>
+          <div class="tl-body">
+            <p>
+              Undergrad at one of the world's top technical universities. Did a lot of math,
+              algorithms, machine learning, and systems programming.
+            </p>
+            <p>
+              Many spinning classes and early morning swims. Came in 19th of over 1000 on my part of
+              the yearly relay race. Developed an appreciation for formal proofs.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">ETH Zurich</span>
+            <span class="tl-tag">CS</span>
+            <span class="tl-tag">ML</span>
+            <span class="tl-tag">Systems</span>
+          </div>
         </div>
       </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-period">2021-2022</div>
-        <div class="tl-role">BSc Biology</div>
-        <div class="tl-org">University of Zurich</div>
-        <div class="tl-body">
-          <p>
-            Studied biology for a year, aiming for a neuroscience master's. Got a little disillusioned
-            with the generality and amount of memorization, thus switched to informatics to gain a toolbox 
-            I could then use for neuro.
-          </p>
-          <p>
-            I really enjoyed genetics though, and my restlessness in the second semester is what got me into triathlon.
-          </p>
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Genetics</span>
-          <span class="tl-tag">Cell Biology</span>
-          <span class="tl-tag">Neuroscience</span>
-          <span class="tl-tag">Triathlon</span>
+      <div class="tl-item">
+        <div class="tl-period">2021–2022</div>
+        <div class="tl-content">
+          <div class="tl-role">BSc Biology</div>
+          <div class="tl-org">University of Zurich</div>
+          <div class="tl-body">
+            <p>
+              Studied biology for a year, aiming for a neuroscience master's. Got a little disillusioned
+              with the generality and amount of memorization, thus switched to informatics to gain a toolbox
+              I could then use for neuro.
+            </p>
+            <p>
+              I really enjoyed genetics though, and my restlessness in the second semester is what got me into triathlon.
+            </p>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Genetics</span>
+            <span class="tl-tag">Cell Biology</span>
+            <span class="tl-tag">Neuroscience</span>
+            <span class="tl-tag">Triathlon</span>
+          </div>
         </div>
       </div>
 
