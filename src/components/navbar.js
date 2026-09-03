@@ -43,7 +43,7 @@ class SiteNavbar extends HTMLElement {
         <div class="nav-right">
           <a href="https://github.com/jofras" target="_blank" rel="noopener">gh</a>
           <a href="mailto:jonfquinn@proton.me">mail</a>
-          <a href="/cv_jq_current.pdf">cv</a>
+          <a href="/cv_jq_sep26.pdf">cv</a>
           <button class="theme-toggle" id="theme-toggle">[${theme}]</button>
         </div>
 
@@ -63,7 +63,7 @@ class SiteNavbar extends HTMLElement {
         <div class="mobile-menu-extras">
           <a href="https://github.com/jofras" target="_blank" rel="noopener">gh</a>
           <a href="mailto:jonfquinn@proton.me">mail</a>
-          <a href="/cv_jq_current.pdf">cv</a>
+          <a href="/cv_jq_sep26.pdf">cv</a>
         </div>
       </div>
     `;
